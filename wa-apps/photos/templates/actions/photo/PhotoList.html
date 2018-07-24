@@ -1,6 +1,6 @@
 <script type="text/javascript" src="{$wa_app_static_url}js/lazy.load.js?v={$wa->version()}"></script>
 
-<div class="sidebar right200px" id="p-toolbar">
+<div class="sidebar aside" id="p-toolbar">
 
     <!-- begin plugin hook: backend_photos_toolbar.top -->
     {foreach $backend_photos_toolbar as $plugin_id => $item}
@@ -8,20 +8,20 @@
     {/foreach}
     <!-- end plugin hook: backend_photos_toolbar.top -->
 
-    <div class="block" id="share-menu-block">
+    <div id="share-menu-block">
         <h6 class="heading">
             <span class="count indicator" style="display:none"></span>
             [`Share`]
         </h6>
-        <ul class="menu-v with-icons compact p-no-photo-selected123 thumbs-view-menu" id="share-menu">
-            <li data-action="embed"><a href="#"><i class="icon16 link"></i>[`Link / Embed`]</a></li>
+        <ul class="menu-v thumbs-view-menu" id="share-menu">
+            <li data-action="embed"><a href="#"><i class="fas fa-link"></i>[`Link / Embed`]</a></li>
             {if $wa->blog && ($wa->blog->rights(false) >= blogRightConfig::RIGHT_READ_WRITE)}
             <li data-action='blog-post'>
               <script type="text/javascript">
               var blog_smarty_enabled = {json_encode($wa->blog->option('can_use_smarty'))};
               var obligatory_size = {json_encode($big_size)};
               </script>
-              <a href="#"><i class="icon16" style="background-image: url('{$wa_url}wa-apps/blog/img/blog16.png'); background-size: 16px 16px;"></i>[`Blog post`]</a>
+              <a href="#"><i class="fas fa-edit"></i>[`Blog post`]</a>
               <div style="display: none">{$wa->blog->postForm('blog-post-form')}</div>
             </li>
             {/if}
@@ -41,22 +41,22 @@
 
         </ul>
     </div>
-    <div class="block" id="organize-menu-block">
+    <div id="organize-menu-block">
         <h6 class="heading">
             <span class="count indicator" style="display:none"></span>
             [`Organize`]
         </h6>
         <ul class="menu-v with-icons compact p-no-photo-selected123 thumbs-view-menu" id="organize-menu">
-            <li data-action='make-stack'><a href="#"><i class="icon16 stack"></i>[`Stack`]</a></li>
-            <li data-action='set-rate'><a href="#;"><i class="icon16 star"></i>[`Rate`]</a></li>
-            <li data-action='add-to-album'><a href="#"><i class="icon16 pictures"></i>[`Add to album`]</a></li>
-            <li data-action='assign-tags'><a href="#"><i class="icon16 tags"></i>[`Assign tags`]</a></li>
+            <li data-action='make-stack'><a href="#"><i class="fas fa-images"></i>[`Stack`]</a></li>
+            <li data-action='set-rate'><a href="#;"><i class="fas fa-star"></i>[`Rate`]</a></li>
+            <li data-action='add-to-album'><a href="#"><i class="fas fa-book"></i>[`Add to album`]</a></li>
+            <li data-action='assign-tags'><a href="#"><i class="fas fa-tag"></i>[`Assign tags`]</a></li>
             {if !empty($album) && $album.type == photosAlbumModel::TYPE_STATIC}
-                <li data-action='delete-from-album'><a href="#"><i class="icon10 no-bw"></i>[`Remove from album`]</a></li>
+                <li data-action='delete-from-album'><a href="#"><i class="fas fa-minus-circle"></i>[`Remove from album`]</a></li>
             {/if}
             <!-- plugin hook: backend_toolbar_list_organize_selected_link -->
-            <li data-action='manage-access' class="top-padded"><a href="#"><i class="icon16 lock"></i>[`Manage access`]</a></li>
-            <li data-action='delete-photos'><a href="#"><i class="icon16 delete"></i>[`Delete photos`]</a></li>
+            <li data-action='manage-access' class="top-padded"><a href="#"><i class="fas fa-lock"></i>[`Manage access`]</a></li>
+            <li data-action='delete-photos'><a href="#"><i class="fas fa-trash-alt"></i>[`Delete photos`]</a></li>
 
             {foreach $backend_photos_toolbar as $plugin_id => $item}
                 {if !empty($item.organize_menu)}
@@ -100,13 +100,15 @@
 
         </ul>
     </div>
-    <div class="block" id="selector-menu-block" style="display: none;">
+    <div id="selector-menu-block" style="display: none;">
         <ul class="menu-v thumbs-view-menu" id="selector-menu">
             <li data-action='select-photos'>
-                <a href="#" class="inline-link small">
-                    <i class="icon16 checkboxes"></i><b><i><span class="unchecked">[`Select all photos`]</span>
+                <a href="#" class="gray">
+                    <i class="fas fa-check-square"></i>
+                    <span>
+                        <span class="unchecked">[`Select all photos`]</span>
                         <span class="checked" style="display:none;">[`Unselect all photos`]</span>
-                    </i></b>
+                    </span>
                 </a>
             </li>
 
@@ -166,7 +168,7 @@
             <img src="{$wa_url}wa-apps/photos/img/drag-photos-here.png" class="p-drag-photos-here" title="[`Drag some photos anywhere on this page to start upload`]" alt="[`Drag some photos anywhere on this page to start upload`]">
         </div>
     {else}
-        <div class="block double-padded" id="p-block">
+        <div class="block" id="p-block">
             <h1>
                 {if !empty($album)}
                     <a href="{if $album.parent_id}#/album/{$album.parent_id}/{else}#/albums/{/if}" class="p-back-to-list">[`← Back`]</a>
@@ -189,47 +191,11 @@
                     </span>
                 {/if}
             </h1>
-            <ul class="menu-h p-content-control">
-                <li class="selected">
-                    <a href="#" class="album-view" data-action="thumbs-view"><!-- index.php?app=photos --><i class="icon16 view-thumbs"></i></a>
-                </li>
-                <li>
-                    <a href="#" class="album-view" data-action="descriptions-view"><!-- index.php?app=photos&descriptions --><i class="icon16 view-thumb-list"></i></a>
-                </li>
-                <!-- plugin hook: backend-list-view-toggle -->
 
-                <li class="p-inline-mixed-string">
-                    {if isset($album)}
-                        {if $frontend_link}
-                            {if $album.status <= 0}
-                                <i class="icon10 lock-bw"></i>
-                                [`Private album`]{if $album.edit_rights}: <a target="_blank" href="{$frontend_link}" id="photo-list-frontend-link" class="gray">{$frontend_link}</a>
-                                <i class="icon10 new-window"></i>{/if}
-                            {else}
-                                [`Public album`]: <a target="_blank" href="{$frontend_link}" id="photo-list-frontend-link">{$frontend_link}</a>
-                                <i class="icon10 new-window"></i>
-                            {/if}
-                            &nbsp;&nbsp;
-                        {/if}
-                        {if $album.edit_rights}
-                            <i class="icon10 settings p-published-album-layout-icon"></i>
-                            <a href="#" id="p-album-settings" class="gray">[`Album settings`]</a>
-                            &nbsp;
-                            <i class="icon10 delete-bw"></i>
-                            <a href="#" id="p-album-delete" class="gray">[`Delete album`]</a>
-                        {/if}
-                    {else if (!empty($frontend_link))}
-                        [`Public link`]: <a target="_blank" href="{$frontend_link}" id="photo-list-frontend-link">{$frontend_link}</a>
-                        <i class="icon10 new-window"></i>
-                    {/if}
-                </li>
-            </ul>
-
-            <div id="place-for-messages"></div>
 
             {if !empty($album)}
                 {if !empty($album.description)}
-                    <p class="small">{$album.description|strip_tags|truncate:512}</p>
+                    <p>{$album.description|strip_tags|truncate:512}</p>
                 {/if}
                 {if $child_albums}
                     <ul class="thumbs li150px p-albums" id="album-thumbs-list">
@@ -253,10 +219,52 @@
                             </li>
                         {/foreach}
                     </ul>
-                    <h5 class="heading">[`In this album`]</h5>
+                    <hr>
+                    <br>
+                    <h5 class="heading" style="margin-left: 0;">[`In this album`]</h5>
+                    <br>
                 {/if}
             {/if}
 
+            <ul class="menu-h no-border p-content-control">
+                <li class="selected">
+                    <a href="#" class="album-view" data-action="thumbs-view"><!-- index.php?app=photos --><i class="fas fa-th-large"></i></a>
+                </li>
+                <li>
+                    <a href="#" class="album-view" data-action="descriptions-view"><!-- index.php?app=photos&descriptions --><i class="fas fa-th-list"></i></a>
+                </li>
+                <!-- plugin hook: backend-list-view-toggle -->
+
+                <li class="p-inline-mixed-string">
+                    {if isset($album)}
+                        {if $frontend_link}
+
+                            {if $album.status <= 0}
+                                <i class="icon10 lock-bw"></i>
+                                [`Private album`]{if $album.edit_rights}: <a target="_blank" href="{$frontend_link}" id="photo-list-frontend-link" class="gray nowrap bold">{$frontend_link}</a>
+                                {/if}
+                            {else}
+                                [`Public album`]: <a target="_blank" href="{$frontend_link}" id="photo-list-frontend-link" class="nowrap bold">{$frontend_link}</a>
+
+                            {/if}
+
+                            &nbsp;&nbsp;
+                        {/if}
+                        {* MOVE SOMEWHERE {if $album.edit_rights}
+                            <i class="icon10 settings p-published-album-layout-icon"></i>
+                            <a href="#" id="p-album-settings" class="gray">[`Album settings`]</a>
+                            &nbsp;
+                            <i class="icon10 delete-bw"></i>
+                            <a href="#" id="p-album-delete" class="gray">[`Delete album`]</a>
+                        {/if} *}
+                    {else if (!empty($frontend_link))}
+                        [`Public link`]: <a target="_blank" href="{$frontend_link}" id="photo-list-frontend-link" class="nowrap bold">{$frontend_link}</a>
+
+                    {/if}
+                </li>
+            </ul>
+
+            <div id="place-for-messages"></div>
 
             <ul class="thumbs li250px" id="photo-list"></ul>
             <div class="lazyloading-wrapper"></div>
@@ -290,7 +298,7 @@
                 </div>
                 <div class="p-image-corner top right">
                     {% if (p.stack_count > 0) { %}<span class="indicator">{%#p.stack_count%}</span>{% } %}
-                    {% if ($.photos.album) { %}<i class="icon16 medal key-photo-icon" title="[`This is a key photo for this album`]"></i>{% } %}
+                    {% if ($.photos.album) { %}<i class="fas fa-home key-photo-icon" title="[`This is a key photo for this album`]"></i>{% } %}
 
                     {/literal}{* @event prepare_photos_backend[top_right][%plugin_id%]  *}{literal}
                     {% for (var plugin in p.hooks.top_right) { %}
@@ -325,7 +333,7 @@
                 <div class="full-description" style="display:none;"></div>
             {% } %}
             {% if ($.photos.album && $.photos.album.edit_rights) { %}
-                <div class="small make-key-photo-link"><a href="javascript:void(0)" class="inline-link"><b><i>[`make key photo`]</i></b></a></div>
+                <div class="small make-key-photo-link"><a href="javascript:void(0)" class="small">[`make key photo`]</a></div>
             {% } %}
         </div>
         <p class="tags">

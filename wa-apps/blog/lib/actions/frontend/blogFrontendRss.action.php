@@ -37,11 +37,12 @@ class blogFrontendRssAction extends blogViewAction
         $link = wa()->getRouteUrl('blog/frontend', array(), true);
         $rss_link = wa()->getRouteUrl('blog/frontend/rss', array(), true);
         $title = waRequest::param('rss_title') ? waRequest::param('rss_title') : wa()->accountName();
+
         $this->view->assign('info',array(
                 'title' => $title,
                 'link' => $link,
                 'description' =>'',
-                'language' => substr(wa()->getLocale(), 0, 2),
+                'language' => 'ru',
                 'pubDate' => date(DATE_RSS),
                 'lastBuildDate' => date(DATE_RSS),
                 'self' => $rss_link,

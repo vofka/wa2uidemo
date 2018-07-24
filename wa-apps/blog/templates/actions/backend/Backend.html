@@ -20,19 +20,17 @@
 
     <div class="b-stream-title">
 
-      <div class="float-right ie-menu-h-fix">
+      <!-- <div class="float-right ie-menu-h-fix">
         <ul class="menu-h" id="blog-stream-primary-menu">
 
           {* @event backend_stream.%plugin_id%.menu *}
-          <!-- plugin hook: "backend_stream.menu" -->
           {foreach $backend_stream as $plugin => $output}
             {if is_array($output) && isset($output.menu)}
             <li>
-              <!-- begin {$plugin} -->{$output.menu}<!-- end {$plugin} -->
+              {$output.menu}
             </li>
             {/if}
           {/foreach}
-          <!-- end plugin hook: "backend_stream.menu" -->
 
           <li class="b-search-form">
             <input type="search" name="text" class="search" placeholder="[`Search posts`]" value="{$text}">
@@ -77,7 +75,7 @@
             <a href="#" class="js-manage-done inline-link gray"><b><i>[`Cancel`]</i></b></a>
           </li>
         </ul>
-      </div>
+      </div> -->
 
       <h1>
         {$stream.title|escape}
@@ -97,13 +95,13 @@
 {$contact_id=$wa->user()->get('id')}
 {foreach $posts as $post_id => $post} <!-- post.id:{$post_id}  -->
 
-  <div class="b-post {$post.color}{if $post.blog_status ne blogBlogModel::STATUS_PUBLIC} b-private-post{/if}" id="b-post-{$post_id}">
-    <h3 style="display:none" class="b-post-title-bulk-mode">
+  <div class="page b-post {$post.color}{if $post.blog_status ne blogBlogModel::STATUS_PUBLIC} b-private-post{/if}" id="b-post-{$post_id}">
+    <h2 style="display:none" class="b-post-title-bulk-mode">
       {if ($post.rights ge blogRightConfig::RIGHT_FULL) or ($contact_id eq $post.contact_id && $post.rights ge blogRightConfig::RIGHT_READ_WRITE)}
         <input type="checkbox" id="blog-post-checkbox-{$post.id}" class="blog-post-checkbox" name="posts[]" value="{$post.id}">
       {/if}
       {$post.title|escape}
-    </h3>
+    </h2>
     <h3>
       {if $post.blog_status eq blogBlogModel::STATUS_PUBLIC}
         {if ($post.rights ge blogRightConfig::RIGHT_FULL) or ($contact_id eq $post.contact_id && $post.rights ge blogRightConfig::RIGHT_READ_WRITE)}
@@ -150,46 +148,44 @@
         <!-- end plugin hook: "prepare_posts_backend.*.post_title_right" -->
       {/if}
     </h3>
-    <div class="profile image20px">
-      <div class="image">
+
+
+
+    <div class="b-post-credentials">
+
       {if $contact_rights && $post.contact_id}
-        <a href="{$wa_backend_url}contacts/#/contact/{$post.contact_id}">
-          <img src="{$post.user.photo_url_20}" alt="" class="userpic">
-        </a>
+          <a href="{$wa_backend_url}contacts/#/contact/{$post.contact_id}">
+            <img src="{$post.user.photo_url_20}" alt="" class="userpic">
+          </a>
       {else}
         <img src="{$post.user.photo_url_20}" alt="" class="userpic">
       {/if}
-      </div>
-      <div class="details">
 
-        <div class="b-post-credentials">
-          {if $contact_rights && $post.contact_id}
-            <a class="hint b-gray-link" href="{$wa_backend_url}contacts/#/contact/{$post.contact_id}">{$post.user.name|escape}</a>
-          {else}
-            <span>{$post.user.name|escape}</span>
-          {/if}
+      {if $contact_rights && $post.contact_id}
+        <a class="hint b-gray-link bold" href="{$wa_backend_url}contacts/#/contact/{$post.contact_id}">{$post.user.name|escape}</a>
+      {else}
+        <strong>{$post.user.name|escape}</strong>
+      {/if}
 
-          <span>{$post.datetime|wa_datetime:"humandatetime"}</span>
+      <span>{$post.datetime|wa_datetime:"humandatetime"}</span>
 
-          {if $post.blog_status eq blogBlogModel::STATUS_PUBLIC}
-            {foreach $post.link item=link}
-              <a target="_blank" href="{$link}" class="underline">{waIdna::dec($link)}</a>
-            {/foreach}
-          {else}
-            {if $post.comment_new_count > 0}
-              <a href="?module=post&amp;id={$post.id}#comments" class="underline{if !$post.comment_count} gray{/if}">{_w('%d comment','%d comments',$post.comment_count,true)}</a>
-              <strong class="highlighted">+{$post.comment_new_count}</strong>
-            {elseif $post.comment_count}
-              <a href="?module=post&amp;id={$post.id}#comments" class="underline{if !$post.comment_count} gray{/if}">{_w('%d comment','%d comments',$post.comment_count,true)}</a>
-            {else}<!-- no comments  -->
-              <a href="?module=post&amp;id={$post.id}#comments" class="underline{if !$post.comment_count} gray{/if}">[`No comments`]</a>
-            {/if}
-          {/if}
+      {if $post.blog_status eq blogBlogModel::STATUS_PUBLIC}
+        {foreach $post.link item=link}
+          <a target="_blank" href="{$link}" class="underline">{$link}</a>
+        {/foreach}
+      {else}
+        {if $post.comment_new_count > 0}
+          <a href="?module=post&amp;id={$post.id}#comments" class="underline{if !$post.comment_count} gray{/if}">{_w('%d comment','%d comments',$post.comment_count,true)}</a>
+          <strong class="highlighted">+{$post.comment_new_count}</strong>
+        {elseif $post.comment_count}
+          <a href="?module=post&amp;id={$post.id}#comments" class="underline{if !$post.comment_count} gray{/if}">{_w('%d comment','%d comments',$post.comment_count,true)}</a>
+        {else}<!-- no comments  -->
+          <a href="?module=post&amp;id={$post.id}#comments" class="underline{if !$post.comment_count} gray{/if}">[`No comments`]</a>
+        {/if}
+      {/if}
 
-        </div>
-
-      </div>
     </div>
+
 
     <div class="b-post-body">
 
@@ -259,7 +255,7 @@
 {/if}
 
 {if $posts_count > 0}
-  <div class="block b-post b-number-of-posts {if $stream.blog}{$stream.blog.color}{else}b-white{/if} pageless-wrapper">
+  {* <div class="block b-post b-number-of-posts {if $stream.blog}{$stream.blog.color}{else}b-white{/if} pageless-wrapper">
     {sprintf(_w("%d post of %d", "%d posts of %d", $posts_count,false),$posts_count,$posts_total_count)}
     {if $posts_count < $posts_total_count}
       <br>
@@ -267,10 +263,10 @@
       <a href="#next" class="pageless-link">[`Show older posts`]</a>
       <span class="pageless-progress" style="display:none"><i class="icon16 loading"></i>[`Loading`]&nbsp;{_w("%d post", "%d posts", min($posts_total_count-$posts_count,$posts_per_page))}...</span>
     {/if}
-  </div>
+  </div> *}
 {else}
   <div class="block b-post b-empty-list {if $stream.blog}{$stream.blog.color}{else}b-white{/if}">
-    {if $stream.all_posts && empty($posts) && empty($text)}
+    {if $stream.all_posts}
 
         <div class="b-welcome">
             <h1>[`Welcome to your new blog!`]</h1>
@@ -289,7 +285,7 @@
   </div>
 {/if}
 
-{if $page ge $pages}
+{* {if $page ge $pages}
   <div class="b-torn-paper {if $stream.blog}{$stream.blog.color}{else}b-white{/if}">
     <div>
       <div class="b-torn-left"></div>
@@ -297,7 +293,7 @@
       <div class="b-torn-right"></div>
     </div>
   </div>
-{/if}
+{/if} *}
 
 {if $page eq 1}
   </div>

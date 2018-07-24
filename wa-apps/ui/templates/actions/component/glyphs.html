@@ -1,0 +1,29 @@
+{$_title = "SVG"}
+{$wa->title($_title)}
+
+{function name="_render_1"}
+<div style="color: #aaa; font-size: 5rem;">
+    <i class="fas fa-book"></i>
+    <i class="fas fa-smile"></i>
+    <i class="fas fa-crown" style="color: gold;"></i>
+    <i class="fas fa-star"></i>
+</div>
+{/function}
+
+<div class="u-component-page">
+
+    <h1>{$_title}</h1>
+    <p>Все вспомогательные иконки в интерфейсе — векторные. SVG. По умолчанию используется и рекомендуется к использованию библиотека <a href="https://fontawesome.com"><b>Font Awesome 5</b></a>.</p>
+
+    {_render_1}
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render_1|escape}</textarea>
+    </div>
+
+    <br>
+    <p>Растровые спрайты .icon16 уходят в историю.</p>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

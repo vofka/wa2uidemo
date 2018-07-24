@@ -1,0 +1,138 @@
+{strip}
+
+{$_component_base = "`$wa_app_url`component/"}
+
+{$component_groups = [
+    [
+        "components" => [
+            "root" => [
+                "name" => "<i class='fas fa-star'></i> Webasyst 2",
+                "url" => $wa_app_url,
+                "bottompadded" => true
+            ],
+            "applist" => [
+                "name" => "Меню приложений",
+                "url" => "{$_component_base}applist/"
+            ],
+            "typography" => [
+                "name" => "Типографика",
+                "url" => "{$_component_base}typography/"
+            ],
+            "layout" => [
+                "name" => "Навигация",
+                "url" => "{$_component_base}layout/"
+            ],
+            "glyphs" => [
+                "name" => "Иконки",
+                "url" => "{$_component_base}glyphs/"
+            ]
+        ]
+    ],
+    [
+        "title" => "Компоненты",
+        "components" => [
+            "menu-v" => [
+                "name" => ".menu-v",
+                "url" => "{$_component_base}menu-v/"
+            ],
+            "menu-h" => [
+                "name" => ".menu-h",
+                "url" => "{$_component_base}menu-h/"
+            ],
+            "toggle" => [
+                "name" => ".toggle",
+                "url" => "{$_component_base}toggle/"
+            ],
+            "form" => [
+                "name" => ".form",
+                "url" => "{$_component_base}form/"
+            ],
+            "dropdown" => [
+                "name" => ".dropdown",
+                "url" => "{$_component_base}dropdown/"
+            ],
+            "progressbar" => [
+                "name" => ".progressbar",
+                "url" => "{$_component_base}progressbar/"
+            ],
+            "dialog" => [
+                "name" => ".dialog",
+                "url" => "{$_component_base}dialog/"
+            ],
+            "card" => [
+                "name" => ".card",
+                "url" => "{$_component_base}card/"
+            ],
+            "slider" => [
+                "name" => ".slider",
+                "todo" => true,
+                "url" => "{$_component_base}slider/"
+            ]
+        ]
+    ],
+    [
+        "title" => "[`Experimental`]",
+        "components" => [
+            "wa-list" => [
+                "name" => ".wa-list",
+                "is_ready" => true,
+                "url" => "{$_component_base}wa-list/"
+            ],
+            "wa-table-box" => [
+                "name" => ".wa-table-box",
+                "is_ready" => true,
+                "url" => "{$_component_base}wa-table-box/"
+            ],
+            "wa-flex-box" => [
+                "name" => ".wa-flex-box",
+                "is_ready" => true,
+                "url" => "{$_component_base}wa-flex-box/"
+            ]
+        ]
+    ]
+]}
+
+{$_current_url = $wa->currentUrl()}
+
+<div class="u-sidebar-wrapper" id="js-sidebar-wrapper">
+    {foreach $component_groups as $_group}
+        <div class="group">
+            {if !empty($_group.title)}
+                <h5 class="heading top-padded"><b>{$_group.title|escape}</b></h5>
+            {/if}
+            {if !empty($_group.components)}
+                <ul class="menu-v">
+                    {foreach $_group.components as $_component}
+                        {$_classes = []}
+                        {$_is_selected = false}
+                        {if $_current_url === $_component.url}
+                            {$_classes[] = "selected"}
+                        {/if}
+                        {if !empty($_component.todo)}
+                            {$_classes[] = "not-ready"}
+                        {/if}
+                        {if !empty($_component.bottompadded)}
+                            {$_classes[] = "bottom-padded"}
+                        {/if}
+
+                        <li class="{$_classes|join:" "}">
+                            <a href="{$_component.url}">{$_component.name}</a>
+                        </li>
+                    {/foreach}
+                </ul>
+            {/if}
+        </div>
+    {/foreach}
+
+    <script>
+        ( function($) {
+
+            $.ui.sidebar = new $.ui.init.Sidebar({
+                $wrapper: $("#js-sidebar-wrapper")
+            });
+
+        })(jQuery);
+    </script>
+</div>
+
+{/strip}

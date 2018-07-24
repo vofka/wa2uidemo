@@ -65,7 +65,7 @@ class blogReminderCli extends waCliController
         
         /**
          * Notify plugins about sending reminder
-         * @event reminder_send
+         * @event followup_send
          * @return void
          */
         wa()->event('reminder_send', $message_count);

@@ -1,0 +1,62 @@
+<h1>Навигация в приложении</h1>
+
+<p>В основе лейаута — <b>flexbox</b>.</p>
+
+<p>Использование стандартных классов позволит автоматически адаптировать навигацию в приложении под все современные типы устройств — десктопы, планшеты, телефоны.</p>
+
+<h3>#wa, .sidebar и .content</h3>
+
+<p>Контейнтеры <code>#wa</code>, <code>.sidebar</code> и <code>.content</code> являются рекомендумыми и подойдет для навигации практически для всех типов приложений.</p>
+
+<blockquote>
+<pre>
+&lt;div class="<b>sidebar</b>"&gt;
+    &lt;div class="sidebar-header"&gt;
+        <em>fixed sidebar header</em>
+    &lt;/div&gt;
+    &lt;div class="sidebar-main"&gt;
+        <em>scrollable sidebar content (using .menu-v is highly recommended here)</em>
+    &lt;/div&gt;
+    &lt;div class="sidebar-footer"&gt;
+        <em>fixed sidebar footer</em>
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="<b>content</b>"&gt;
+    <em>scrollable app content</em>
+&lt;/div&gt;
+</pre>
+</blockquote>
+
+
+<p>На планшетах и десктоп-системах внутри каждого <code>.sidebar</code> и <code>.content</code> автоматически появляется внутренняя прокрутка, если контент не помещается в имеющееся пространство. На мобильных устройствах <code>.sidebar</code> автоматически скрывается и открывается по нажатию на «гамбургер», а основной контент <code>.content</code> занимает всю область экрана.</p>
+
+<h3>$wa->account() + $wa->applist()</h3>
+
+<p>В связи с переходом на flexbox, ранее неделимый хелпер рендера меню навигации бекенда <code>$wa->header()</code> разделяется на два элемента и либо подключить их в рамках одного контейнера (навигация, как в Shop-Script), либо в разных (например, для приложений с сайдбаром).</p>
+
+<p><code><b>&#123;$wa->account()&#125;</b></code> используется для отображения названия аккаунта, ссылки на дешборд и  переключения между аккаунтами Webasyst, подключенными к Webasyst ID пользователя.</p>
+
+<p><code><b>&#123;$wa->applist()&#125;</b></code> выводит меню приложений.</p>
+
+
+<blockquote>
+<pre>
+&lt;div id="wa"&gt;
+    &lt;div class="sidebar"&gt;
+        <b>&#123;$wa->account()&#125;</b>
+        &lt;div class="sidebar-main"&gt;
+            <em>scrollable sidebar content (using .menu-v is recommended)</em>
+        &lt;/div&gt;
+        &lt;div class="sidebar-footer"&gt;
+            <em>sidebar footer</em>
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="content"&gt;
+        <b>&#123;$wa->applist()&#125;</b>
+        &lt;div id="wa-app"&gt;
+            <em>app content</em>
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+</blockquote>

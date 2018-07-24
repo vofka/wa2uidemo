@@ -1,0 +1,30 @@
+{$_title = ".card"}
+{$wa->title($_title)}
+
+{function name="_render_1"}
+<figure class="card">
+    <a href="https://ru.wikipedia.org/wiki/Кавказский_заповедник">
+        <img src="http://www.vofka.ru/wa-data/public/photos/72/49/4972/4972.300x300@2x.jpg" style="width: 300px; height: 300px;">
+    </a>
+    <div class="block">
+        <h5>Кавказский заповедник</h5>
+        <p class="small">Государственный природный заповедник. Самая большая по территории и старейшая, особо охраняемая природная территория на Северном Кавказе. <a href="https://ru.wikipedia.org/wiki/Кавказский_заповедник">Википедия</a>.</p>
+    </div>
+</figure>
+{/function}
+
+<div class="u-component-page">
+
+    <h1>{$_title}</h1>
+    <p>«Поднимает» блок над базовым уровнем контента.</p>
+
+    {_render_1}
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render_1|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+
+</div>

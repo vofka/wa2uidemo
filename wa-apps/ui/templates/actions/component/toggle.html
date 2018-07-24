@@ -1,0 +1,54 @@
+{$_title = ".toggle"}
+{$wa->title($_title)}
+
+{function name="_render" class="" id=""}
+<div class="toggle{if !empty($class)} {$class}{/if}" id="toggle-{$id}">
+    <button type="button">
+        <i class="fas fa-globe-asia"></i> Москва
+    </button>
+    <button type="button">Краснодар</button>
+    <button type="button" class="selected">
+        <i class="fas fa-globe-asia"></i> Сочи
+    </button>
+    <button type="button">Ставрополь</button>
+    <button type="button">Йошкар-Ола</button>
+</div>
+
+<script>
+    ( function($) {
+        $("#toggle-{$id}").waToggle({
+            change: function(event, target, toggle) {
+                alert( $(target).text() );
+            }
+        });
+    })(jQuery);
+</script>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+    <p>Переключатель режима или подраздела.</p>
+
+    <div class="line">
+        {_render class="" id="2"}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render class="" id="2"}</textarea>
+    </div>
+
+
+    <div class="line">
+        <p>.toggle.small — уменьшенная версия.</p>
+        {$i = 1}
+        {_render class="small" id="1"}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render class="small" id="1"}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

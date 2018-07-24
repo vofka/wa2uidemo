@@ -3,7 +3,7 @@
     {$app_name = $activity_item.app.name}
     {$app_color = ifset($activity_item.app.sash_color, "#aaa")}
     {if $activity_item.datetime_group != $_group}
-        <div class="activity-divider heading">{$activity_item.datetime_group}</div>
+        {* REMOVED FROM THE DEMO <div class="activity-divider heading">{$activity_item.datetime_group}</div> *}
     {/if}
     {$_group=$activity_item.datetime_group}
 

@@ -17,34 +17,38 @@
     };
 </script>
 <div class="b-stream">
-  <div class="block triple-padded b-stream-title">
-    <div class="block half-padded float-left">
-      <a href="?action=calendar&amp;month={$prev_month}"><i class="icon16 larr"></i></a>
-      {if $prev_overdue}
-        <i class="icon16 exclamation" title="[`Overdue posts`]"></i>
-      {/if}      
-    </div>
-    <div class="block half-padded float-right">
-      {if $next_overdue}
-        <i class="icon16 exclamation" title="[`Overdue posts`]"></i>
-      {/if}    
-      <a href="?action=calendar&amp;month={$next_month}"><i class="icon16 rarr"></i></a>
-    </div>
-    <h1 class="align-center">
-      <select name="month" class="month">
-        {foreach $months as $key => $value}
-          <option value="{$key}" {if $current_month == $key}selected{/if}>{$value}</option>
-        {/foreach}
-      </select>
-      <select name="year" class="year">
-        {foreach $years as $year}
-          <option value="{$year}" {if $current_year == $year}selected{/if}>{$year}</option>
-        {/foreach}
-      </select>
-    </h1>
-  </div>
 
-  <div class="block double-padded b-post b-white">
+  <div class="page b-post b-white">
+
+        <h1 class="align-center">{foreach $months as $key => $value}{if $current_month == $key}{$value}{/if}{/foreach} {$current_year}</h1>
+
+      {* <div class="block triple-padded b-stream-title">
+        <div class="block half-padded float-left">
+          <a href="?action=calendar&amp;month={$prev_month}"><i class="icon16 larr"></i></a>
+          {if $prev_overdue}
+            <i class="icon16 exclamation" title="[`Overdue posts`]"></i>
+          {/if}
+        </div>
+        <div class="block half-padded float-right">
+          {if $next_overdue}
+            <i class="icon16 exclamation" title="[`Overdue posts`]"></i>
+          {/if}
+          <a href="?action=calendar&amp;month={$next_month}"><i class="icon16 rarr"></i></a>
+        </div>
+        <h1 class="align-center">
+          <select name="month" class="month">
+            {foreach $months as $key => $value}
+              <option value="{$key}" {if $current_month == $key}selected{/if}>{$value}</option>
+            {/foreach}
+          </select>
+          <select name="year" class="year">
+            {foreach $years as $year}
+              <option value="{$year}" {if $current_year == $year}selected{/if}>{$year}</option>
+            {/foreach}
+          </select>
+        </h1>
+      </div> *}
+
     <table class="b-calendar">
       <thead>
       <tr>

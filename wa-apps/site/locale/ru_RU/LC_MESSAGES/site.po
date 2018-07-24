@@ -83,9 +83,6 @@ msgstr "Загрузка..."
 msgid "Upload"
 msgstr "Загрузить"
 
-msgid "Upload image"
-msgstr "Загрузить изображение"
-
 #: /wa-apps/site/templates/layouts/Default.html:63
 msgid "Save"
 msgstr "Сохранить"
@@ -559,7 +556,7 @@ msgstr "Возвращает значение глобальной переме�
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:19
 msgid "Assigns a new value to a global variable."
-msgstr "Присваивает новое значение глобальной переменной"
+msgstr "Присваивает новое значение глобальной пемеренной"
 
 msgid "Assigns a new title."
 msgstr "Устанавливает новый заголовок."
@@ -570,7 +567,7 @@ msgstr "Возвращает значение GET-параметра (анало
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:21
 msgid "Based on current session data, returns <em>true</em> or <em>false</em> depending on whether a multi-touch mobile device is used. If no session variable indicates the requested website version (mobile or desktop), User Agent information is used."
-msgstr "Возвращает <em>true</em> или <em>false</em> в зависимости от того, использует ли пользователь в данный момент мобильное multi-touch устройство (iPhone, Android и пр.) или нет; если переменная сессии, содержащая тип версии сайта (мобильный или стандартный), отсутствует, то используется информация из заголовков User-Agent"
+msgstr "Возвращает <em>true</em> или <em>false</em> в зависимости от того, использует ли пользователь в данный момент мобильное multi-touch устройство (iPhone, Android и пр.) или нет; если переменная сессии, содержащая тип версии сайта (мобильный или стандартный), отсутствует, то используется информация из заголовков User Agent"
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:23
 msgid "Returns POST parameter value (same as $_POST[\"<em>key</em>\"] in PHP).<br>\"<em>default</em>\" is an optional default value which is returned if specified POST parameter is not found."
@@ -594,7 +591,7 @@ msgstr "Возвращает массив с данными авторизова
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:28
 msgid "Returns User Agent info by specified “<em>key</em>” parameter:"
-msgstr "Возвращает информацию User-Agent по указанному параметру <em>key</em>:"
+msgstr "Возвращает информацию User Agent по указанному параметру <em>key</em>:"
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:30
 msgid "— <em>\"isMobile\"</em>: returns <em>true</em> or <em>false</em> if user is using a multi-touch mobile device (iOS, Android and similar), based solely on User Agent string;"
@@ -602,7 +599,7 @@ msgstr "— <em>\"isMobile\"</em>: основываясь на содержим�
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:31
 msgid "— not specified: returns entire User Agent string;"
-msgstr "— не указано: возвращает всю строку User-Agent"
+msgstr "— не указано: возвращает всю строку User Agent"
 
 #: /wa-apps/site/lib/actions/helper/siteHelper.action.php:69
 msgid "Displays a simple variable (non array/object)"
@@ -914,7 +911,7 @@ msgstr "Регистрация завершена успешно."
 #: /wa-apps/site/themes/default/sidebar.html:4
 #: /wa-apps/site/templates/actions/blocks/Blocks.html:41
 msgid "Revert to original"
-msgstr "Восстановить из оригинала"
+msgstr "Восстановить из оргинала"
 
 #: /wa-apps/site/templates/actions/blocks/Blocks.html:194
 msgid "This will reset all customizations you applied to this block. Are you sure?"
@@ -986,7 +983,7 @@ msgstr "Структура сайта"
 
 #: /wa-apps/site/templates/actions/routing/Routing.html:33
 msgid "Site structure is defined by routing rules. Each rule sets which app should run by which URL (web address). Similar to how folders are used to organize files on a computer, routing rules are used to create a website powered by multiple apps."
-msgstr "Структура сайта определяется правилами маршрутизации. Каждое правило указывает, по какому адресу работает каждое приложение. По аналогии с тем, как папки используются для организации файлов на компьютере, правила маршрутизации используются для распределения приложений по разделам сайта."
+msgstr "Структура сайта определяется правилами маршрутизации. Каждое правило указывает по какому адресу какое приложение работает. По аналогии с тем, как папки используются для организации файлов на компьютере, правила маршрутизации используются для распределения приложений по разделам сайта."
 
 #: /wa-apps/site/templates/actions/routing/RoutingEdit.html:10
 msgid "Back"
@@ -1327,7 +1324,7 @@ msgstr "Можно включить «Запомнить меня» в форм�
 
 #: /wa-apps/site/templates/layouts/Sidebar.html:34
 msgid "Alias (mirror site) for"
-msgstr "Зеркало сайта"
+msgstr "Зеркало (алиас) сайта"
 
 #: /wa-apps/site/templates/layouts/Sidebar.html:85
 msgid "This is a mirror site (alias) for <strong>%s</strong>."
@@ -1339,42 +1336,3 @@ msgstr "Указанный email-адрес уже используется."
 
 msgid "Design"
 msgstr "Дизайн"
-
-msgid "Select a language to translate text strings in website frontend."
-msgstr "Выберите язык для перевода текстовых строк на страницах сайта."
-
-msgid "If “Auto” option is selected, website language will be determined by user browser settings."
-msgstr "Если выбран вариант «Авто», язык сайта будет определен на основании настроек браузера пользователя."
-
-msgid "Files uploaded here are accessible to all website visitors without authorization. Do not upload private files."
-msgstr "Загруженные здесь файлы доступны всем посетителям сайта без авторизации. Не загружайте личные файлы."
-
-msgid "Security"
-msgstr "Безопасность"
-
-msgid "Redirect to HTTPS"
-msgstr "Перенаправлять на HTTPS"
-
-msgid "Redirect website visitors from ordinary HTTP to secure HTTPS connection within this settlement."
-msgstr "Перенаправлять посетителей сайта с обычного HTTP- на безопасное HTTPS-подключение в пределах этого поселения."
-
-msgid "This option will work only if an SSL certificate is installed for your domain name."
-msgstr "Эта настройка будет работать, только если для вашего доменного имени установлен SSL-сертификат."
-
-msgid "To enable redirect to HTTPS for <em>all</em> website settlements, change this option in <a href=\"%s#/settings/\">common site settings</a>."
-msgstr "Чтобы включить перенаправление на HTTPS для <em>всех</em> поселений сайта, измените этот параметр в <a href=\"%s#/settings/\">общих настройках сайта</a>."
-
-msgid "Redirect website visitors from ordinary HTTP to secure HTTPS connection."
-msgstr "Перенаправлять посетителей сайта с обычного HTTP- на безопасное HTTPS-подключение."
-
-msgid "To activate this option, <a>log in via HTTPS</a>."
-msgstr "Чтобы активировать эту настройку, <a>войдите через HTTPS</a>."
-
-msgid "<b>WYSIWYG editor may change your HTML code.</b><br><br>It is necessary for correct text formatting. Smarty code may be broken and outdated HTML tags may be replaced with modern ones.<br><br>Are you sure to switch to WYSIWYG editor?"
-msgstr "<b>Редактор WYSIWYG может изменить ваш HTML-код.</b><br><br>Это необходимо для правильного форматирования текста. Код Smarty может быть взломан, и устаревшие HTML-теги могут быть заменены на современные.<br><br>Вы действительно хотите переключиться на WYSIWYG-редактор?"
-
-msgid "Switch"
-msgstr "Переключиться"
-
-msgid "Select Webasyst default captcha or Google reCAPTCHA"
-msgstr "Выбрать стандартную капчу Webasyst или Google reCAPTCHA"

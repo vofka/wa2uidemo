@@ -26,7 +26,7 @@
                     <input id="s-auth-app-{$app.id}" type="radio" name="app_id" value="{$app.id}" {if $app.id == $auth_config['app']}checked="checked"{/if}>
                     <label for="s-auth-app-{$app.id}">
                         <img class="s-app16x16icon-menu-v" src="{$wa_url}{$app.icon.16}"></i> {$app.name|escape}
-                        <span class="hint">{waIdna::dec($app.login_url)}</span>
+                        <span class="hint">{$app.login_url}</span>
                     </label>
                 </li>
                 {/foreach}
@@ -65,7 +65,6 @@
                     <input type="hidden" name="auth_captcha" value="0">
                     <input id="s-auth-captcha" name="auth_captcha" type="checkbox" {if $auth_config['signup_captcha']}checked="checked"{/if} value="1">
                     <label for="s-auth-captcha">[`Enable captcha for signup form`]</label><br>
-                    <span class="hint s-auth-captcha-text" style="{if !$auth_config['signup_captcha']}display: none{/if}">{sprintf('<a href="%s">[`Select Webasyst default captcha or Google reCAPTCHA`]</a>',"{$wa_backend_url}installer/?module=settings")}</span>
                 </div>
 
                 <div class="block not-padded bottom-padded">
@@ -126,14 +125,6 @@
 </div>
 <script type="text/javascript">
     $(function () {
-
-        $('#s-auth-captcha').on('change', function () {
-            if ($('#s-auth-captcha').prop( "checked" )) {
-                $('.s-auth-captcha-text').show();
-            } else {
-                $('.s-auth-captcha-text').hide();
-            }
-        });
 
         $('#configure-app').click(function() {
             $('#configure-app-div').slideToggle(200);

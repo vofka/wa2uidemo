@@ -69,27 +69,25 @@
 </head>
 <body>
 
-<div id="wa">
-    {* HEADER *}
-    {$wa->header()}
+    <div id="wa" class="t-app-wrapper">
 
-    {* APP *}
-    <div class="t-app-wrapper" id="wa-app">
         {* SIDEBAR *}
         {if !empty($sidebar)}
-            <div class="t-sidebar-wrapper sidebar left200px" id="t-sidebar-wrapper">
+            <div class="t-sidebar-wrapper sidebar" id="t-sidebar-wrapper">
+                {$wa->account()}
                 {$sidebar|default:''}
             </div>
         {/if}
 
         {* CONTENT *}
-        <div class="t-content-wrapper">
-            <div class="t-content-block" id="t-content">
+        <div class="t-content-wrapper content">
+            {$wa->applist()}
+            <div class="t-content-block block" id="t-content">
                 {block name='content'}{$content}{/block}
             </div>
         </div>
+
     </div>
-</div>
 
 <script>
 (function($) {

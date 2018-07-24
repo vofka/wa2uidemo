@@ -1,0 +1,564 @@
+@import "nib";
+
+.u-sidebar-wrapper
+    .menu-v
+        .not-ready
+            color #bbb
+            a
+                cursor default
+                color inherit
+
+.u-component-page
+    .line
+        margin 2rem 0 0
+        &:first-child
+            margin-top 0
+
+    textarea.u-code-preview
+        width 100%
+        min-height 50px
+        box-sizing border-box
+        border-radius 5px
+        border 1px solid #dddfe5
+        background #f8f8f8
+        color #888
+        font-size .9rem
+        line-height 1.25em
+        resize vertical
+
+        &:not(.wide)
+            max-width 600px
+
+    .color
+        display inline-block
+        width .66rem
+        height .66rem
+        border-radius 50%
+        border 1px solid rgba(0,0,0,.1)
+
+.toggle
+    display inline-block
+    vertical-align top
+    margin 0
+    padding 0
+    font-size 0
+    white-space nowrap
+    max-width 100%
+    overflow auto
+
+    & > *
+        display inline-block
+        vertical-align top
+        margin 0 0 0 -2px
+        padding 0 1em
+        list-style none
+
+        border 2px solid #dddfe5
+        font-size 1rem
+        line-height 2.5em
+
+        background #fff
+        color #666
+        transition background 200ms linear, border-color 200ms linear
+
+        outline none
+        cursor pointer
+
+        &:first-child
+            margin-left 0
+            border-radius 5px 0 0 5px
+
+        &:last-child
+            border-radius 0 5px 5px 0
+
+        &.selected
+            position relative
+            border-color #5a9ef8
+            background #5a9ef8
+            color #fff
+            cursor default
+
+        &:hover:not(.selected)
+            border-color #daeaff
+            background #daeaff
+
+    &.small
+        & > *
+            font-size .8rem
+            line-height 2.5em
+            border-width 1px
+            margin-left -1px
+            &:first-child
+                margin-left 0
+
+ul.wa-list
+    margin 0
+    padding 0
+
+    & > li
+        margin 0
+        padding 0
+        list-style none
+
+    &.space-1
+        & > li
+            margin 1rem 0 0
+            &:first-child
+                margin-top 0
+
+.form
+    .form-group
+        margin 2rem 0 0
+        &:first-child
+            margin-top 0
+
+    .field
+        display table
+        width 100%
+        margin 1rem 0 0
+        table-layout fixed
+        &:first-child
+            margin-top 0
+
+        & > *
+            display table-cell
+            vertical-align top
+            &.middle
+                vertical-align middle
+
+        & > .name
+            width 150px
+            padding-right 1rem
+            line-height 1.5em
+
+        .value
+            .wide
+                width 100%
+                box-sizing border-box
+
+            .hint
+                margin-top .5rem
+                &:first-child
+                    margin-top 0
+
+@media screen and (max-width: 760px)
+    .form
+        .field
+            display block
+            width auto
+            & > *
+                display block
+
+            & > .name
+                width auto
+                padding-right 0
+                line-height 1.25em
+
+            & > .value
+                margin .5rem 0 0
+                &:first-child
+                    margin-top 0
+
+.dropdown
+    position relative
+    display inline-block
+
+    & > .dropdown-toggle
+        &:after
+            content: "";
+            display: inline-block;
+            width: 0;
+            height: 0;
+            margin-left: .255em;
+            vertical-align: .255em;
+
+            border-top: .3em solid;
+            border-right: .3em solid transparent;
+            border-bottom: 0;
+            border-left: .3em solid transparent;
+
+    & > .dropdown-area
+        display none
+        position absolute
+        top 100%
+        left 0
+
+        width 200px
+        min-width 100%
+        max-width 500px
+        max-height 500px
+        overflow auto
+        padding .5rem 0
+        margin 0
+
+        background #fff
+        border 1px solid rgba(0,0,0, .1)
+        border-radius 5px
+
+        &.right
+            left auto
+            right 0
+
+        & > *
+            &:first-child
+                margin-top 0
+            &:last-child
+                margin-bottom 0
+
+        & > .dropdown-item
+            display block
+            padding .25rem 1rem
+            margin 0
+            line-height 1.2em
+            color inherit
+            cursor pointer
+
+            &:hover
+                background rgba(0,0,0,.1)
+
+            &.selected
+                background rgba(0,0,0,.1)
+                cursor default
+                font-weight: bold;
+
+    &.is-opened
+        & > .dropdown-area
+            display block
+            z-index 1000
+
+.wa-table-box
+    display table
+    width 100%
+
+    &.inline
+        width auto
+
+    &.fixed
+        table-layout fixed
+
+    & > *
+        display table-cell
+        vertical-align top
+
+        &.middle
+            vertical-align middle
+
+@media screen and (max-width: 760px)
+    .wa-table-box
+        &.is-adaptive
+            display block
+            & > *
+                display block
+
+.wa-flex-box
+    display: flex;
+
+    &.middle
+        align-items: center;
+
+    &.fixed
+        justify-content: space-between;
+        &.fixed > *
+            flex-basis: 100%;
+            flex-grow: 0;
+
+    & > *
+        &.middle
+            align-self: center;
+
+@media screen and (max-width: 760px)
+    .wa-flex-box
+        &.is-adaptive
+            flex-direction column
+
+.progressbar
+    .bar-line-wrapper
+        &.text-outside
+            display flex
+            align-items center
+
+            & > .bar-text
+                margin-left 1rem
+
+        .bar-outer
+            border-radius 100px
+            background rgba(0,0,0,.1)
+            width 100%
+            overflow hidden
+
+            .bar-inner
+                border-radius 100px
+                background #abc
+                min-height 6px
+                width 0;
+                text-align right
+                transition width 600ms ease
+
+                .bar-text
+                    padding 0 10px
+                    color #fff
+
+        .bar-text
+            font-size .9rem
+            line-height 1.5em
+
+    .bar-circle-wrapper
+        position relative
+        width 200px
+        padding 0 0 200px
+
+        svg
+            position absolute
+            top 0
+            left 0
+            width 100%
+            height 100%
+
+            circle
+            path
+                fill transparent
+                stroke-linecap round
+                transform translate(50%, 50%)
+
+            circle
+                stroke rgba(0,0,0,.1)
+
+            path
+                stroke #abc
+
+        .bar-text
+            position absolute
+            top 50%
+            left 0
+            width 100%
+            text-align center
+            font-size 2rem
+            line-height 1.5em
+            margin (-3/4)em 0 0
+
+.wa-textarea
+    display block
+    padding .5em 1em
+    margin 0
+    border 0
+    width 60%
+    height 2.5rem * 4
+    min-height 2.5rem
+
+    background rgba(0,0,0,.06)
+    border-radius 5px
+
+    font-size: inherit;
+    line-height 1.5rem
+    color #1f2d3d
+
+    appearance: none;
+    outline none
+
+    box-sizing: border-box;
+    resize vertical
+    &.wide
+        width 100%
+
+.wa-input
+    display inline-block
+    background rgba(0,0,0,.06)
+    border-radius 5px
+    font-size 0
+
+    &.wide
+        width 100%
+
+    input
+        display inline-block
+        padding .5em 1em
+        margin 0
+        border 0
+
+        font-size: 1rem;
+        line-height 1.5rem
+        background transparent
+        color #1f2d3d
+
+        appearance: none;
+        outline none
+
+        box-sizing: border-box;
+
+    .wa-icon
+        display inline-block
+        padding 0
+        font-size 1rem
+        width 1.75rem
+        opacity .6
+        transition opacity 200ms linear
+        &:hover
+            opacity 1
+
+.wa-checkbox
+    display inline-block
+    input
+        display none
+        & + span
+            position relative
+            display inline-block
+            width 1rem
+            height 1rem
+            border-radius 5px
+            border 1px solid rgba(0,0,0,.06)
+            background rgba(0,0,0,.06)
+            cursor pointer
+            box-sizing border-box
+
+            &.default
+                &:before
+                    content ""
+                    position absolute
+                    top 20%
+                    left 20%
+                    width 60%
+                    height 60%
+                    border-radius 50%
+                    box-sizing border-box
+
+            .wa-icon
+                display: inline-block;
+                vertical-align: top;
+                width: 100%;
+
+                visibility hidden
+
+                font-size: 10px;
+                line-height: 1rem;
+                text-align: center;
+
+        &:checked + span
+            &.default:before
+                background #1f2d3d
+
+            .wa-icon
+                visibility visible
+
+.wa-radio
+    input
+        display none
+        & + span
+            position relative
+            display inline-block
+            width 1rem
+            height 1rem
+            border-radius 50%
+            border 1px solid rgba(0,0,0,.06)
+            background rgba(0,0,0,.06)
+            cursor pointer
+            box-sizing border-box
+            &:before
+                content ""
+                position absolute
+                top 20%
+                left 20%
+                width 60%
+                height 60%
+                border-radius 50%
+                box-sizing border-box
+
+        &:checked + span
+            &:before
+                background #1f2d3d
+
+.wa-select
+    $_space = 3rem
+    position relative
+    display inline-block
+    background rgba(0,0,0,.06)
+    border-radius 5px
+
+    &:before
+        $_size = .4rem
+        content ""
+        display block
+        position absolute
+        top 50%
+        right (($_space - $_size * 2)/2)
+        margin ($_size / -2) 0 0
+        border solid transparent
+        border-width $_size
+        border-top-color rgba(0,0,0,.3)
+
+    select
+        position relative
+        display inline-block
+        padding .5em $_space .5em 1em
+        margin 0
+        border 0
+
+        font-size: inherit;
+        line-height 1.5rem
+        color #1f2d3d
+
+        appearance: none;
+        outline none
+
+        background transparent
+        box-sizing: border-box;
+        cursor pointer
+
+.dialog
+    display none
+    position fixed
+    top 0
+    left 0
+    width 100%
+    height 100%
+    box-sizing border-box
+    z-index 2000
+
+    .dialog-background
+        position absolute
+        top 0
+        left 0
+        width 100%
+        height 100%
+        box-sizing border-box
+        background rgba(255,255,255,.8)
+
+    .dialog-body
+        position absolute
+        top 0
+        left 0
+        box-sizing border-box
+        background #fff
+        width 600px
+        max-width 80%
+
+        border: 5px solid #f3f3f3;
+        border-radius 5px
+        box-shadow: 0 0 70px #bbb;
+
+        &.is-animated
+            transition all 200ms linear
+
+        form
+            overflow visible
+
+        .dialog-header
+            padding 1rem
+            & > *
+                &:first-child
+                    margin-top 0
+                &:last-child
+                    margin-bottom 0
+            & + .dialog-content
+                padding-top: 0;
+
+        .dialog-content
+            padding 1rem
+            min-height 300px
+
+            &.is-long-content
+                overflow auto
+                box-sizing border-box
+
+        .dialog-footer
+            margin 1rem 0 0
+            padding 0 1rem 1rem 1rem

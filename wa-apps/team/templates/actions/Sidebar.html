@@ -6,33 +6,36 @@
 {$_has_rights = teamHelper::hasRights()}
 {$_can_sort = ( $_is_admin || $_has_rights)}
 
-<div class="t-sidebar-block" id="t-sidebar">
+<main id="t-sidebar">
 
-    {* main nav *}
-    <div class="block">
-        <ul class="menu-v with-icons">
-            {if teamHelper::hasRights('add_users')}
-                <li class="bottom-padded top-padded">
-                    <a class="bold js-no-highlight" href="javascript:void(0)" id="t-new-user-link"><i class="icon16 add"></i>[`New user`]</a>
-                </li>
-            {/if}
-            <li class="{if $module == 'users' && !$action}selected{/if}" id="all-users-sidebar-link">
+    <ul class="menu-v">
+        {if teamHelper::hasRights('add_users')}
+            <li class="bottom-padded top-padded">
+                <a class="bold js-no-highlight" href="javascript:void(0)" id="t-new-user-link"><i class="fas fa-plus-circle"></i>[`New user`]</a>
+            </li>
+        {/if}
+        <li class="{if $module == 'users' && !$action}selected{/if}" id="all-users-sidebar-link">
+            <a href="{$wa_app_url}">
+                <i class="fas fa-users"></i>
+                <span>[`All users`]</span>
                 <span class="count js-count">{$all_count}</span>
-                <a href="{$wa_app_url}"><i class="icon16 contact"></i>[`All users`]</a>
-            </li>
-            <li class="{if $module == 'users' && $action == 'online'}selected{/if}">
+            </a>
+        </li>
+        <li class="{if $module == 'users' && $action == 'online'}selected{/if}">
+            <a href="{$wa_app_url}online/">
+                <i class="fas fa-circle"></i>
+                <span>[`Online`]</span>
                 <span class="count">{$online_count}</span>
-                <a href="{$wa_app_url}online/"><i class="icon16 status-green"></i>[`Online`]</a>
-            </li>
-            <li class="{if $module == "calendar"}selected{/if}">
-                <a href="{$wa_app_url}calendar/"><i class="icon16 calendar"></i>[`Calendar`]</a>
-            </li>
+            </a>
+        </li>
+        <li class="{if $module == "calendar"}selected{/if}">
+            <a href="{$wa_app_url}calendar/"><i class="fas fa-calendar-alt"></i>[`Calendar`]</a>
+        </li>
 
-            <!-- plugin hook: 'backend_sidebar.top_li' -->
-            {* @event backend_sidebar.%plugin_id%.top_li *}
-            {foreach $backend_sidebar as $_}{ifset($_.top_li)}{/foreach}
-        </ul>
-    </div>
+        <!-- plugin hook: 'backend_sidebar.top_li' -->
+        {* @event backend_sidebar.%plugin_id%.top_li *}
+        {foreach $backend_sidebar as $_}{ifset($_.top_li)}{/foreach}
+    </ul>
 
     {* search *}
     <div class="block">
@@ -47,19 +50,21 @@
     {if !empty($backend_sidebar)}{foreach $backend_sidebar as $_}{ifset($_.section)}{/foreach}{/if}
 
     {* groups *}
-    <div class="block js-drop-block">
-        {if teamHelper::hasRights('add_groups')}<a href="javascript:void(0);" class="count js-add-user-group"><i class="icon16 add"></i></a>{/if}
-        <h5 class="heading top-padded"><b>[`Groups`]</b></h5>
+    <div class="js-drop-block">
+        <h5 class="heading top-padded">
+            {if teamHelper::hasRights('add_groups')}<a href="javascript:void(0);" class="count js-add-user-group"><i class="fas fa-plus-circle"></i></a>{/if}
+            [`Groups`]
+        </h5>
         {if $groups}
-            <ul class="menu-v with-icons collapsible t-groups-list">
+            <ul class="menu-v t-groups-list">
                 {foreach $groups as $_g}
                     {$_can_add = teamHelper::hasRights("edit_users_in_group.`$_g.id`")}
 
                     <li class="{if $_can_add}js-drop-place{/if}" data-group-id="{$_g.id}">
-                        <span class="count js-count">{$_g.cnt}</span>
                         <a href="{$wa_app_url}group/{$_g.id}/">
                             <i class="icon16 {if $_g.icon}{$_g.icon}{else}user{/if}"></i>
-                            {$_g.name|escape}
+                            <span>{$_g.name|escape}</span>
+                            <span class="count js-count">{$_g.cnt}</span>
                         </a>
                     </li>
                 {/foreach}
@@ -70,17 +75,22 @@
     </div>
 
     {* locations *}
-    <div class="block js-drop-block">
-        {if teamHelper::hasRights('add_groups')}<a href="javascript:void(0);" class="count js-add-user-location"><i class="icon16 add"></i></a>{/if}
-        <h5 class="heading top-padded"><b>[`Locations`]</b></h5>
+    <div class="js-drop-block">
+        <h5 class="heading top-padded">
+            {if teamHelper::hasRights('add_groups')}<a href="javascript:void(0);" class="count js-add-user-location"><i class="fas fa-plus-circle"></i></a>{/if}
+            <b>[`Locations`]</b>
+        </h5>
         {if $locations}
-            <ul class="menu-v collapsible t-locations-list">
+            <ul class="menu-v t-locations-list">
                 {foreach $locations as $_l}
                     {$_can_add = teamHelper::hasRights("edit_users_in_group.`$_l.id`")}
 
                     <li class="{if $_can_add}js-drop-place{/if}" data-group-id="{$_l.id}">
-                        <span class="count js-count">{$_l.cnt}</span>
-                        <a href="{$wa_app_url}group/{$_l.id}/">{$_l.name|escape}</a>
+                        <a href="{$wa_app_url}group/{$_l.id}/">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>{$_l.name|escape}</span>
+                            <span class="count js-count">{$_l.cnt}</span>
+                        </a>
                     </li>
                 {/foreach}
             </ul>
@@ -90,64 +100,69 @@
     </div>
 
     {* user status *}
-    <div class="block">
-        <ul class="menu-v with-icons">
-            {* <li>
-                <span class="count js-count">≈25300</span>
-                <a href="javascript:void(0);"><i class="icon16 contact"></i>[`All contacts`]</a>
-            </li> *}
-            {if $invited_count}
-                <li>
+    <ul class="menu-v">
+        {* <li>
+            <span class="count js-count">≈25300</span>
+            <a href="javascript:void(0);"><i class="icon16 contact"></i>[`All contacts`]</a>
+        </li> *}
+        {if $invited_count}
+            <li>
+                <a href="{$wa_app_url}invited/">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>[`Invitations`]</span>
                     <span class="count js-count">{$invited_count}</span>
-                    <a href="{$wa_app_url}invited/"><i class="icon16 status-yellow-tiny"></i>[`Invitations`]</a>
-                </li>
-            {/if}
-            {if $inactive_count}
-                <li>
+                </a>
+            </li>
+        {/if}
+        {if $inactive_count}
+            <li>
+                <a href="{$wa_app_url}inactive/">
+                    <i class="fas fa-ban"></i>
+                    <span>[`Inactive users`]</span>
                     <span class="count js-count">{$inactive_count}</span>
-                    <a href="{$wa_app_url}inactive/"><i class="icon16 status-gray-tiny"></i>[`Inactive users`]</a>
+                </a>
+            </li>
+        {/if}
+
+        <!-- plugin hook: 'backend_sidebar.bottom_li' -->
+        {* @event backend_sidebar.%plugin_id%.bottom_li *}
+        {foreach $backend_sidebar as $_}{ifset($_.bottom_li)}{/foreach}
+    </ul>
+</main>
+
+
+{if teamHelper::hasRights()}
+    <footer>
+        <div class="hr"></div>
+
+        <ul class="menu-v">
+            {if $wa->user()->isAdmin('webasyst')}
+                <li>
+                    <a href="{$wa_app_url}access/"><i class="fas fa-key"></i>[`Access`]</a>
                 </li>
             {/if}
-
-            <!-- plugin hook: 'backend_sidebar.bottom_li' -->
-            {* @event backend_sidebar.%plugin_id%.bottom_li *}
-            {foreach $backend_sidebar as $_}{ifset($_.bottom_li)}{/foreach}
+            {* <li>
+                <a href="javascript:void(0);"><i class="icon16 reports"></i>[`Reports`]</a>
+            </li> *}
+            <li{if $module=='plugins'} class="selected"{/if}>
+                <a href="{$wa_app_url}plugins/#/"><i class="fas fa-plug"></i>[`Plugins`]</a>
+            </li>
+            <li>
+                <a href="{$wa_app_url}settings/"><i class="fas fa-cog"></i>[`Settings`]</a>
+            </li>
         </ul>
-    </div>
+    </footer>
+{/if}
 
-    {if teamHelper::hasRights()}
-        <div class="hr"></div>
-        <div class="block">
-            <ul class="menu-v with-icons">
-                {if $wa->user()->isAdmin('webasyst')}
-                    <li>
-                        <a href="{$wa_app_url}access/"><i class="icon16 access"></i>[`Access`]</a>
-                    </li>
-                {/if}
-                {* <li>
-                    <a href="javascript:void(0);"><i class="icon16 reports"></i>[`Reports`]</a>
-                </li> *}
-                <li{if $module=='plugins'} class="selected"{/if}>
-                    <a href="{$wa_app_url}plugins/#/"><i class="icon16 plugins"></i>[`Plugins`]</a>
-                </li>
-                <li>
-                    <a href="{$wa_app_url}settings/"><i class="icon16 settings"></i>[`Settings`]</a>
-                </li>
-            </ul>
-        </div>
-    {/if}
-
-    {* Initialization of the internal content of the sidebar *}
-    <script>
-        ( function($) {
-            $.team.sidebar = new Sidebar({
-                $wrapper: $("#t-sidebar"),
-                app_url: {$wa_app_url|json_encode},
-                can_sort: {if $_can_sort}true{else}false{/if}
-            });
-        })(jQuery);
-    </script>
-
-</div>
+{* Initialization of the internal content of the sidebar *}
+<script>
+    ( function($) {
+        $.team.sidebar = new Sidebar({
+            $wrapper: $("#t-sidebar"),
+            app_url: {$wa_app_url|json_encode},
+            can_sort: {if $_can_sort}true{else}false{/if}
+        });
+    })(jQuery);
+</script>
 
 {/strip}

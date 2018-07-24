@@ -1,0 +1,27 @@
+{$_title = "Меню приложений"}
+{$wa->title($_title)}
+
+<div class="u-component-page">
+
+    <h1>Иконки приложений</h1>
+    <p>Формат иконок приложений Webasyst 2 полностью продолжает и соответствует миру идеальной аппликации — плоская основа,  слои, градиенты.</p>
+
+    <img src="{$wa_url}wa-apps/ui/img/dummyappicons/installer.png" style="width: 144px; height: 144px; margin-right: 1rem;">
+    <img src="{$wa_url}wa-apps/ui/img/dummyappicons/files.png" style="width: 144px; height: 144px; margin-right: 1rem;">
+    <img src="{$wa_url}wa-apps/ui/img/dummyappicons/tasks.png" style="width: 144px; height: 144px; margin-right: 1rem;">
+    <img src="{$wa_url}wa-apps/ui/img/dummyappicons/team.png" style="width: 144px; height: 144px; margin-right: 1rem;">
+
+    <ul>
+        <li>Любая форма (никакой обязательной обводки или жесткого форм-фактора).</li>
+        <li>Тени допустимы, но, как и во всем интерфейсе, для обозначения иерархии уровней, а не объема объектов.</li>
+        <li>Обводку (outline) не используем.</li>
+        <li>Яркие насыщенные цвета и градиенты.</li>
+        <li>У ключевых элементов иконки должны быть скругленные края (минимальный радиус скругления = 1/16 or размера иконки).</li>
+        <li>PNG или SVG — не важно.</li>
+        <li>Размер иконки (если PNG) — 512x512px; масштабирование под нужный размер в интерфейсе сделает браузер.</li>
+    </ul>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

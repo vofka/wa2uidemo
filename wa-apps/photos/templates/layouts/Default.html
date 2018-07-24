@@ -138,10 +138,10 @@
         {% if (o.frontend_link_template) { %}
             {% if (photo.status <= 0 && photo.hash) { %}
                 <i class="icon10 lock-bw"></i>
-                <span class="hink">[`Private link`]: <a id="photo-frontend-link" target="_blank" href="{%#frontend_link_template.replace('%url%', photo.private_url)%}" class="gray">{%#frontend_link_template.replace('%url%', photo.private_url)%}</a></span>
+                <span class="hink">[`Private link`]: <a id="photo-frontend-link" target="_blank" class="nowrap bold" href="{%#frontend_link_template.replace('%url%', photo.private_url)%}" class="gray">{%#frontend_link_template.replace('%url%', photo.private_url)%}</a></span>
             {% } else if (photo.status > 0) { %}
                 [`Public link`]:
-                <a id="photo-frontend-link" target="_blank" href="{%#frontend_link_template.replace('%url%', photo.url)%}">{%#frontend_link_template.replace('%url%/', '<span id="photo-frontend-url">%url%</span>').replace('%url%', photo.url+'/')%}</a><input type="text" id="photo-frontend-url-input" style="display:none;"><span class="slash" style="display:none;">/<em class="errormsg" style="display:none;"></em></span>
+                <a id="photo-frontend-link" target="_blank"  class="nowrap bold" href="{%#frontend_link_template.replace('%url%', photo.url)%}">{%#frontend_link_template.replace('%url%/', '<span id="photo-frontend-url">%url%</span>').replace('%url%', photo.url+'/')%}</a><input type="text" id="photo-frontend-url-input" style="display:none;"><span class="slash" style="display:none;">/<em class="errormsg" style="display:none;"></em></span>
                 <i class="icon10 new-window"></i>
                 <a href="javascript:void(0);" class="gray inline-link" id="photo-frontend-url-edit-link">
                     <i class="icon10 edit"></i><b><i>edit</i></b>
@@ -165,9 +165,9 @@
 {/literal}{/capture}
 
 {capture name="template-p-block"}
-<div class="sidebar right200px" id="p-toolbar"></div>
-<div class="content left{$sidebar_width}px right200px" id="p-content">
-    <div class="block double-padded" id="p-block"></div>
+<div class="sidebar aside" id="p-toolbar"></div>
+<div class="content left{$sidebar_width}px" id="p-content">
+    <div class="block" id="p-block"></div>
     <div id="changable-area"></div>
     <div id="cover" class="dialog-background" style="display:none;">
         <i class="icon16 loading"></i>
@@ -187,66 +187,64 @@
     {/foreach}
     <!-- end plugin hook: "backend_photo_toolbar.top" -->
 
-    <div class="block">
-        <h6 class="heading">[`Share`]</h6>
-        <ul class="menu-v with-icons compact" id="share-menu">
-            <li data-action='embed'><a href="#"><i class="icon16 link"></i>[`Link / Embed`]</a></li>
-            {if $wa->blog && ($wa->blog->rights(false) >= blogRightConfig::RIGHT_READ_WRITE)}
-            <li data-action='blog-post'>
-              <script type="text/javascript">
-              var blog_smarty_enabled = {json_encode($wa->blog->option('can_use_smarty'))};
-              var obligatory_size = {json_encode($big_size)};
-              </script>
-              <a href="#"><i class="icon16" style="background-image: url('{$wa_url}wa-apps/blog/img/blog16.png');"></i>[`Blog post`]</a>
-              <div style="display: none">{$wa->blog->postForm('blog-post-form')}</div>
-            </li>
+
+    <h6 class="heading">[`Share`]</h6>
+    <ul class="menu-v" id="share-menu">
+        <li data-action='embed'><a href="#"><i class="fas fa-link"></i>[`Link / Embed`]</a></li>
+        {if $wa->blog && ($wa->blog->rights(false) >= blogRightConfig::RIGHT_READ_WRITE)}
+        <li data-action='blog-post'>
+          <script type="text/javascript">
+          var blog_smarty_enabled = {json_encode($wa->blog->option('can_use_smarty'))};
+          var obligatory_size = {json_encode($big_size)};
+          </script>
+          <a href="#"><i class="fas fa-edit"></i>[`Blog post`]</a>
+          <div style="display: none">{$wa->blog->postForm('blog-post-form')}</div>
+        </li>
+        {/if}
+
+        {foreach $backend_photo_toolbar as $plugin_id => $item}
+            {if !empty($item.share_menu)}
+                {if is_array($item.share_menu)}
+                    {foreach $item.share_menu as $menu_item}
+                        {$menu_item}
+                    {/foreach}
+                {else}
+                    {$item.share_menu}
+                {/if}
             {/if}
+        {/foreach}
+        <!-- plugin hook: backend_photo_toolbar_share -->
+    </ul>
 
-            {foreach $backend_photo_toolbar as $plugin_id => $item}
-                {if !empty($item.share_menu)}
-                    {if is_array($item.share_menu)}
-                        {foreach $item.share_menu as $menu_item}
-                            {$menu_item}
-                        {/foreach}
-                    {else}
-                        {$item.share_menu}
-                    {/if}
-                {/if}
-            {/foreach}
-            <!-- plugin hook: backend_photo_toolbar_share -->
-        </ul>
-    </div>
 
-    <div class="block">
-        <h6 class="heading">[`Edit`]</h6>
-        <ul class="menu-v with-icons compact" id="edit-menu">
-            <li data-action='rotate-left'><a href="javascript:void(0);"><i class="icon16 rotate-left"></i>[`Left`]</a></li>
-            <li data-action='rotate-right'><a href="javascript:void(0);"><i class="icon16 rotate-right"></i>[`Right`]</a></li>
-            <!-- plugin hook: backend_photo_toolbar_edit -->
-            <!-- plugin hook: "backend_photo_toolbar.edit_menu" -->
-            {foreach $backend_photo_toolbar as $plugin_id => $item}
-                {if !empty($item.edit_menu)}
-                    {if is_array($item.edit_menu)}
-                        {foreach $item.edit_menu as $menu_item}
-                            {$menu_item}
-                        {/foreach}
-                    {else}
-                        {$item.edit_menu}
-                    {/if}
+    <h6 class="heading">[`Edit`]</h6>
+    <ul class="menu-v" id="edit-menu">
+        <li data-action='rotate-left'><a href="javascript:void(0);"><i class="fas fa-sync-alt"></i>[`Left`]</a></li>
+        <li data-action='rotate-right'><a href="javascript:void(0);"><i class="fas fa-sync-alt"></i>[`Right`]</a></li>
+        <!-- plugin hook: backend_photo_toolbar_edit -->
+        <!-- plugin hook: "backend_photo_toolbar.edit_menu" -->
+        {foreach $backend_photo_toolbar as $plugin_id => $item}
+            {if !empty($item.edit_menu)}
+                {if is_array($item.edit_menu)}
+                    {foreach $item.edit_menu as $menu_item}
+                        {$menu_item}
+                    {/foreach}
+                {else}
+                    {$item.edit_menu}
                 {/if}
-            {/foreach}
-            <!-- end plugin hook: "backend_photo_toolbar.edit_menu" -->
-        </ul>
-    </div>
-    <div class="block">
-        <h6 class="heading">[`Organize`]</h6>
-        <ul class="menu-v with-icons compact" id="photo-organize-menu">
-            <li data-action='unstack'><a href="#"><i class="icon16 stack"></i>[`Unstack`]</a></li>
-            <li data-action='add-to-album'><a href="#"><i class="icon16 pictures"></i>[`Add to album`]</a></li>
-            <li data-action='manage-access'><a href="#"><i class="icon16 lock"></i>[`Manage access`]</a></li>
-            <li data-action="delete-photo"><a href="#"><i class="icon16 delete"></i>[`Delete photo`]</a></li>
-        </ul>
-    </div>
+            {/if}
+        {/foreach}
+        <!-- end plugin hook: "backend_photo_toolbar.edit_menu" -->
+    </ul>
+
+
+    <h6 class="heading">[`Organize`]</h6>
+    <ul class="menu-v" id="photo-organize-menu">
+        <li data-action='unstack'><a href="#"><i class="fas fa-images"></i>[`Unstack`]</a></li>
+        <li data-action='add-to-album'><a href="#"><i class="fas fa-book"></i>[`Add to album`]</a></li>
+        <li data-action='manage-access'><a href="#"><i class="fas fa-lock"></i>[`Manage access`]</a></li>
+        <li data-action="delete-photo"><a href="#"><i class="fas fa-trash-alt"></i>[`Delete photo`]</a></li>
+    </ul>
 
     <!-- begin plugin hook: "backend_photo_toolbar.bottom" -->
     {foreach $backend_photo_toolbar as $plugin_id => $item}
@@ -255,8 +253,8 @@
     <!-- end plugin hook: "backend_photo_toolbar.bottom" -->
 
 {literal}
+    <h6 class="heading">[`Tags`]</h6>
     <div class="block">
-        <h6 class="heading">[`Tags`]</h6>
         <input id="photo-tags" value="">
         <span class="hint">[`Separate tags with comma (,)`]</span><br>
         <div id="photos-photo-popular-tags" class="tags">
@@ -264,7 +262,7 @@
             {if $popular_tags}
                 [`Popular tags`]:
                 {foreach $popular_tags as $tag}
-                    <span><a data-tag-id="{$tag.id}" href="javascript:void(0);" class="inline-link"><b><i>{$tag.name|escape}</i></b></a></span>
+                    <span><a data-tag-id="{$tag.id}" href="javascript:void(0);">{$tag.name|escape}</a></span>
                 {/foreach}
                 <br>
             {/if}
@@ -407,10 +405,15 @@
 
 
 <div id="wa">
-    {$wa->header()}
-    <div id="wa-app">
-        {include "templates/layouts/Sidebar.html"}
-        <div id="content">{if isset($content)}{$content}{/if}</div>
+    <nav class="sidebar">
+        {$wa->account()}
+        <main id="wa-app-navigation" class="flexbox vertical">
+            {include "templates/layouts/Sidebar.html"}
+        </main>
+    </nav>
+    <div class="content">
+        {$wa->applist()}
+        <div id="content" class="flexbox">{if isset($content)}{$content}{/if}</div>
     </div>
 </div>
 <script type="text/javascript">

@@ -202,7 +202,6 @@ body.is-highlighted #wa-header .d-dashboard-header-content .d-dashboard-link-wra
 }
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-notification-wrapper .d-notification-block {
   padding: 0 0 1rem 0;
-  font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Helvetica Neue', Arial, sans-serif;
 }
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-notification-wrapper .d-notification-block .inner-header-wrapper {
   padding: 0.5rem;
@@ -248,13 +247,10 @@ body.is-highlighted #wa-header .d-dashboard-header-content .d-dashboard-link-wra
 }
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-activity-block {
   margin: 10px 0 0;
-  background: #fff;
   opacity: 0;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.13);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.13);
 }
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-activity-block.is-hidden {
   display: none;
@@ -381,11 +377,10 @@ body.is-highlighted #wa-header .d-dashboard-header-content .d-dashboard-link-wra
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-activity-block .activity-list-wrapper .activity-list-block .activity-item .item-image-wrapper,
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-activity-block .activity-list-wrapper .activity-list-block .activity-item .item-content-wrapper {
   display: table-cell;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   border-top: 1px solid rgba(127,127,127,0.13);
 }
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-activity-block .activity-list-wrapper .activity-list-block .activity-item .item-image-wrapper {
-  background: #fff;
   vertical-align: top;
 }
 .d-page-wrapper .d-content-wrapper .d-activity-wrapper .d-activity-block .activity-list-wrapper .activity-list-block .activity-item .item-image-wrapper img {
@@ -770,8 +765,8 @@ body.is-highlighted #wa-header .d-dashboard-header-content .d-dashboard-link-wra
   height: 100%;
   box-sizing: border-box;
   background: #fff;
-  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.13);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.13);
+  -webkit-box-shadow: 0 1px 23px rgba(0,0,0,0.07);
+  box-shadow: 0 1px 23px rgba(0,0,0,0.07);
   -webkit-transition: box-shadow 300ms linear;
   -moz-transition: box-shadow 300ms linear;
   -ms-transition: box-shadow 300ms linear;

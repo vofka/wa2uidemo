@@ -1,0 +1,53 @@
+<h1>Попробовать wa-2.0.css</h1>
+<ol>
+    <li>Скопируйте ваше приложение в этот репозиторий в папку <code>wa-apps/<b>APP_ID</b></code>.</li>
+    <li>Подключите приложение в конфиге <code>wa-config/<b>apps.php</b></code> (<code>'APP_ID' => true</code>).</li>
+    <li>
+        Запустите приложение в бекенде Webasyst!
+        <br><br>
+        Скорее всего, приложение «поплывет» в связи с тем, что основной контейнер <code>#wa</code> теперь работает в режиме <code>display: flex;</code> (см. <a href="https://www.w3schools.com/css/css3_flexbox.asp" target="_blank">документацию CSS Flexbox</a>). Для наведения порядка потребуется добавить несколько классов.<br><br>
+    </li>
+    <li>Откройте основной шаблон-лейаут приложения (вероятно, он называется так — <code>wa-apps/APP_ID/templates/layouts/Backend.html</code>).</li>
+    <li>
+        Найдите в этом файле основной контейнер приложения <code>#wa</code> и хелпер подключения навигации:
+
+<br><br>
+<blockquote>
+<pre>
+&lt;div id="wa"&gt;
+    <b>&#123;$wa->header()&#125;</b>
+</pre>
+</blockquote><br>
+
+    </li>
+    <li>
+    «Разбейте» хелпер <code>&#123;$wa->header()&#125;</code> на два — <code>&#123;$wa->account()&#125;</code> и <code>&#123;$wa->applist()&#125;</code>. Это <a href="{$wa_app_url}component/layout/">необходимо</a> в связи с переходом на CSS Flexbox.
+    <br><br>
+    Так как шаблоны приложений могут иметь какую угодно структуру, универсального рецепта по изменению верстки дать невозможно. Но скорее всего, что общая структура макета должна стать такой:
+<br><br>
+<blockquote>
+<pre>
+&lt;div id="wa"&gt;
+    &lt;div class="sidebar"&gt;
+        <b>&#123;$wa->account()&#125;</b>
+        &lt;div class="sidebar-main"&gt;
+            <em>scrollable sidebar content (using .menu-v is recommended)</em>
+        &lt;/div&gt;
+        &lt;div class="sidebar-footer"&gt;
+            <em>sidebar footer</em>
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class="content"&gt;
+        <b>&#123;$wa->applist()&#125;</b>
+        &lt;div id="wa-app"&gt;
+            <em>app content</em>
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+</blockquote>
+<br>
+    </li>
+    <li>Если это не сработало, посмотрите в качестве примеры лейауты приложений в этом превью-репозитории: Блог, Файлы, Команда и т.д. Эти лейауты намеренно перенесены на wa-2.0.css частично, чтобы показать общую идею изменений.</li>
+    <li>Все вопросы лучше всего обсудить на форуме разработчиков Webasyst: <a href="https://developers.webasyst.ru/forum/" target="_blank"><b>https://developers.webasyst.ru/forum/</b></a></li>
+</ol>

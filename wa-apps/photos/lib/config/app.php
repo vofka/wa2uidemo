@@ -14,10 +14,5 @@ return array(
     'img' => 'img/photos.png',
     'my_account' => true,
     'sash_color' => '#af71b3',
-    'icon'=>array(
-        16 => 'img/photos16.png',
-        24 => 'img/photos24.png',
-        48 => 'img/photos.png',
-        96 => 'img/photos96.png',
-     )
+    'icon' => 'img/photos.png'
 );

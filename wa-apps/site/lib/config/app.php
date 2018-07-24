@@ -1,17 +1,12 @@
-<?php 
+<?php
 
 return array(
     'name' => 'Site', // _w('Site')
-    'icon' => array(
-        96 => 'img/site96.png',
-        48 => 'img/site.png',
-        24 => 'img/site24.png',
-        16 => 'img/site16.png'
-    ),
+    'icon' => 'img/site.png',
     'sash_color' => '#49a2e0',
     'frontend' => true,
-    'version'=>'2.3.3',
-    'critical'=>'2.3.1',
+    'version'=>'2.2.16',
+    'critical'=>'2.2.10',
     'vendor' => 'webasyst',
     'system' => true,
     'rights' => true,

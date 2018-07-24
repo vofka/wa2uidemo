@@ -1,15 +1,15 @@
-<div class="content left{$sidebar_width}px"><div class="double-padded block">
+<div class="content left{$sidebar_width}px"><div class="block">
 
     {if !count($albums)}
 
-        <div class="block double-padded p-welcome" id="welcome-block">
+        <div class="block p-welcome" id="welcome-block">
             <p>[`The album list is empty.`]</p>
         </div>
         <p class="gray"></p>
-            
+
     {else}
-    
-        <h1>[`Albums`]</h1>   
+
+        <h1>[`Albums`]</h1>
         <ul class="thumbs li250px p-albums" id="album-thumbs-list">
             {foreach $albums as $a}
                 <li data-album-id="{$a.id}">
@@ -47,4 +47,3 @@
     $.photos.initAlbumThumbsDragAndDrop($('#album-thumbs-list'), 0);
     $.Retina && $.photos.options.retina_2x_enabled && $('#album-thumbs-list img').retina();
 })();</script>
-

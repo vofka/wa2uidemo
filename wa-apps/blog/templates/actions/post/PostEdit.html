@@ -1,7 +1,7 @@
-<form id="post-form" action="" method="post">
+<form id="post-form" action="" method="post" class="flexbox">
     {$wa->csrf()}
 
-    <div class="hidden sidebar right200px realtime-preview">
+    {* <div class="hidden sidebar aside realtime-preview">
         <div class="column-resize-handler"></div>
         <div class="block">
             <iframe id="realtime-preview-iframe" src="about:blank" sandbox="allow-scripts"></iframe>
@@ -10,9 +10,9 @@
             </div>
             <input type="hidden" name="realtime_on" value="">
         </div>
-    </div>
+    </div> *}
 
-    <div class="sidebar right200px b-post-editor-toolbar">
+    <div class="sidebar aside b-post-editor-toolbar">
         <div class="block b-edit-options">
 
             <!-- allow comments -->
@@ -22,7 +22,7 @@
                     {if !$show_comments}
                         <span id="allow-comment-switcher-off-label" class="b-unselected">[`Off`]</span>
                     {else}
-                        <ul class="menu-h">
+                        <ul class="menu-h no-border">
                             <li><span id="allow-comment-switcher-off-label" class="b-unselected">[`Off`]</span></li>
                             <li><input id="allow-comment-switcher" type="checkbox" name="comments_allowed" value="1" {if $post.comments_allowed}checked="checked"{/if}></li>
                             <li><span id="allow-comment-switcher-on-label">[`On`]</span></li>
@@ -148,10 +148,10 @@
         </div>
     </div>{* .sidebar.right200px *}
 
-    <div class="content right200px">
+    <div class="content page" style="padding: 0;">
 
         <div class="b-stream b-single-post">
-            <div class="b-stream-title" style="padding-left: 20px;">
+            <div class="b-stream-title">
                 <div class="float-right">
                     <a href="#" id="realtime-preview-toggle" title="[`Mirror mode`]"></a>
                 </div>
@@ -189,7 +189,18 @@
                         {/if}
                     </li>
                 </ul>
+
+                <ul class="menu-h padded-left">
+                    {foreach $blogs as $id => $blog_}{if $blog_.rights ge blogRightConfig::RIGHT_READ_WRITE}
+                        <li id="blog-selector-{$id}" class="{if $id eq $blog.id}selected{/if}" data-blog-status="{if $blog_.status == blogBlogModel::STATUS_PRIVATE}private{else}public{/if}">
+                            <a href="#{$id}" class="inline-link change-blog">
+                                {$blog_.name|escape|truncate:32}{if $blog_.status ==  blogBlogModel::STATUS_PRIVATE} <i class="icon10 lock-bw no-overhanging"></i>{/if}
+                            </a>
+                        </li>
+                    {/if}{/foreach}
+                </ul>
             </div>
+
             <div class="block double-padded b-post b-bottom-extra-padded {$blog.color}"{if isset($post.id) && $post.id} id="b-post-{$post.id}"{/if} style="position: static;">
 
                 <input id="post-title" name="title" type="text" value="{$post.title|escape}" class="b-post-title" maxlength="255" placeholder="[`Post title`]">
@@ -217,12 +228,10 @@
                             <span id="url-editable" {if $is_adding || $unsuccessful_save}style="display:none;"{/if}>
                                 {$link = $post.link}
                                 {$full_link = "{if $link}{$link|escape}{if $post.url}{$post.url|escape}{/if}/{if isset($preview_hash)}?preview={$preview_hash}{/if}{/if}"}
-                                {$realtime_preview_url = $post.preview_link}
-                                <a id="url-link" target="_blank" href="{$full_link}" data-preview-url="{$realtime_preview_url|escape}">{$post.link|escape}<span class="slug">{if $post.url}{$post.url|escape}/{else}<!-- slug placeholder -->{/if}</span></a>
+                                <a id="url-link" target="_blank" href="{$full_link}">{$post.link|escape}<span class="slug">{if $post.url}{$post.url|escape}/{else}<!-- slug placeholder -->{/if}</span></a>
                                 <a id="url-edit-link" href="javascript:void(0);" class="inline-link inline-edit"><i class="icon10 edit"></i><b><i>[`edit`]</i></b></a>
                             </span>
                             <span id="url-edit" {if !$is_adding && !$unsuccessful_save}style="display:none;"{/if}>
-                                <a href="#" id="preview-url" style="display: none">{$post.preview_url|default:''|escape}</a>
                                 {strip}
                                     <span id="pure-url">{$post.link|escape}</span>
                                     <input type="text" id="post-url" name="url" value="{$post.url|escape}" {if isset($validate_messages) && !empty($validate_messages)}class="error"{/if}>/
@@ -232,13 +241,12 @@
 
                         <div id="other-urls">
                             {if isset($post.other_links) && !empty($post.other_links)}
-                                {foreach $post.other_links as $i => $link}
+                                {foreach $post.other_links item=link name=link}
                                     {$full_link = "{if $link}{$link|escape}{if $post.url}{$post.url|escape}{/if}/{if isset($preview_hash)}?preview={$preview_hash}{/if}{/if}"}
-                                    {$realtime_preview_url = ifset($post, 'other_preview_links', $i, '')}
                                     {if $post.status == blogPostModel::STATUS_PUBLISHED}
                                         <i class="icon10 yes"></i>
                                         <span class="small">[`Published`]:
-                                            <a target="_blank" href="{$full_link}" data-preview-url="{$realtime_preview_url|escape}">{$link|escape}<span class="slug">{if $post.url}{$post.url|escape}/{else}<!-- slug placeholder -->{/if}</span></a>
+                                            <a target="_blank" href="{$full_link}">{$link|escape}<span class="slug">{if $post.url}{$post.url|escape}/{else}<!-- slug placeholder -->{/if}</span></a>
                                         </span>
                                     {else if $is_adding}
                                         <span class="small">[`Preview`]:
@@ -246,7 +254,7 @@
                                         </span>
                                     {else}
                                         <span class="hint">[`Preview`]:
-                                            <a target="_blank" href="{$full_link}" data-preview-url="{$realtime_preview_url|escape}">{$link|escape}<span class="slug">{if $post.url}{$post.url|escape}/{else}<!-- slug placeholder -->{/if}</span></a>
+                                            <a target="_blank" href="{$full_link}">{$link|escape}<span class="slug">{if $post.url}{$post.url|escape}/{else}<!-- slug placeholder -->{/if}</span></a>
                                         </span>
                                     {/if}
                                     <br>
@@ -312,7 +320,7 @@
                         </li>
                     {/if}
                 </ul>
-                <textarea id="post_text" name="text" cols="60" rows="20" style="border:0; display: none;">{$post.text|escape}</textarea>
+                <textarea id="post_text" name="text" cols="60" rows="20" style="border:0">{$post.text|escape}</textarea>
                 <div  class="b-post-editor-wrapper" id="post_text_wrapper">
                     {if blogPhotosBridge::isAvailable()}
                         <div id="blog-photo_bridge-editor" class="hidden">
@@ -452,15 +460,11 @@
     <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-ui/i18n/jquery.ui.datepicker-{$wa->locale()}.js"></script>
 {/if}
 
-{* REDACTOR (WYSIWYG) *}
-<link type="text/css" rel="stylesheet" href="{$wa_url}wa-content/js/redactor/2/redactor.css?v{$wa->version(true)}">
-{* CUT PLUGIN *}
 <script src="{$wa_app_static_url}js/redactor_plugins.js?v{$wa->version()}"></script>
-<script src="{$wa_url}wa-content/js/redactor/2/redactor.min.js?v{$wa->version(true)}"></script>
-{if substr($wa->locale(), 0, 2)!='en'}
-    <script src="{$wa_url}wa-content/js/redactor/2/{substr($wa->locale(), 0, 2)}.js?v{$wa->version(true)}"></script>
-{/if}
-{* ACE *}
+<link type="text/css" rel="stylesheet" href="{$wa_url}wa-content/js/redactor/redactor.css?v{$wa->version(true)}">
+<script src="{$wa_url}wa-content/js/redactor/redactor.min.js?v{$wa->version(true)}"></script>
+{if $lang!='en'}<script src="{$wa_url}wa-content/js/redactor/{$lang}.js?v{$wa->version(true)}"></script>{/if}
+
 <script type="text/javascript" src="{$wa_url}wa-content/js/ace/ace.js?v{$wa->version(true)}"></script>
 <script type="text/javascript" src="{$wa_url}wa-content/js/elrte/elrte.min.js"></script>
 {if $lang!='en'}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{$wa->appName()} &mdash; {$wa->title()}</title>
+    {$wa->css()}
+    <link type="text/css" rel="stylesheet" href="{$wa_app_static_url}css/ui.css?v{$wa->version()}">
+    <script src="{$wa_url}wa-content/js/jquery/jquery-1.8.2.min.js"></script>
+    <script src="{$wa_url}wa-content/js/jquery-wa/wa.core.js?v{$wa->version(true)}"></script>
+    <script src="{$wa_app_static_url}js/ui.js?v{$wa->version()}"></script>
+
+    {* TODO: cooperate with @leonyx and replace it to core *}
+    <script src="{$wa_app_static_url}js/toggle.js?v{$wa->version()}"></script>
+    <script src="{$wa_app_static_url}js/dropdown.js?v{$wa->version()}"></script>
+    <script src="{$wa_app_static_url}js/progressbar.js?v{$wa->version()}"></script>
+    <script src="{$wa_app_static_url}js/dialog.js?v{$wa->version()}"></script>
+
+    {* SVG Icons *}
+    <link href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous" rel="stylesheet">
+    <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous" defer></script>
+
+    <script>
+        (function($) { "use strict";
+            $.ui.lang = {substr($wa->locale(), 0, 2)|json_encode};
+            $.ui.app_url = {$wa_app_url|json_encode};
+            $.ui.backend_url = {$wa_backend_url|json_encode};
+            $.ui.is_debug = {$wa->debug()|json_encode};
+            $.ui.title.pattern = "{$wa->appName()} — %s";
+        })(jQuery);
+    </script>
+</head>
+<body>
+
+<div id="wa">
+    <nav class="sidebar">
+        {$wa->account()}
+
+        <div id="wa-app-navigation" class="sidebar-main flexbox vertical">
+            {$sidebar}
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="block align-center bordered-top">
+                <a href="{$wa_app_url}component/try/" class="button green">Попробовать</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="content">
+        {* placed in the same flex container with the app content for same scroll *}
+        {$wa->applist()}
+
+        <div id="wa-app-content" class="longread">
+            {$content}
+        </div>
+
+        <script>
+            ( function($) {
+                $.ui.content = new $.ui.init.ContentRouter({
+                    $content: $("#wa-app-content")
+                });
+            })(jQuery);
+        </script>
+    </div>
+
+    <script>
+        ( function($) {
+            $.ui.start();
+        })(jQuery);
+    </script>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+{$_title = "List"}
+{$wa->title($_title)}
+
+{function name="_render_list"}
+<ul class="wa-list">
+    <li>
+        Элемент 1
+    </li>
+    <li>
+        <a href="javascript:void(0);">Элемент 2</a>
+    </li>
+    <li>
+        Элемент 3
+    </li>
+    <li>
+        <a href="javascript:void(0);">Элемент 4</a>
+    </li>
+</ul>
+{/function}
+
+{function name="_render_list_inline"}
+<ul class="wa-list wa-flex-box">
+    <li>
+        Элемент 1
+    </li>
+    <li>
+        <a href="javascript:void(0);">Элемент 2</a>
+    </li>
+    <li>
+        Элемент 3
+    </li>
+    <li>
+        <a href="javascript:void(0);">Элемент 4</a>
+    </li>
+</ul>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+
+    <div class="line">
+        <p>.wa-list</p>
+        {_render_list}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render_list|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <p>.wa-list горизонтальный</p>
+        {_render_list_inline}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render_list_inline|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

@@ -1,0 +1,58 @@
+{$_title = ".menu-h"}
+{$wa->title($_title|json_encode)}
+
+{$_menu = [
+[
+    "name" => "Главная",
+    "url" => "javascript:void(0);",
+    "icon_url" => ""
+],
+[
+    "name" => "Новости",
+    "url" => "javascript:void(0);",
+    "selected" => 1,
+    "icon_url" => "{$wa_url}wa-apps/team/img/team.png"
+],
+[
+    "name" => "Блог",
+    "url" => "javascript:void(0);",
+    "icon_url" => "{$wa_url}wa-apps/site/img/site.png"
+],
+[
+    "name" => "Магазин",
+    "url" => "javascript:void(0);",
+    "icon_url" => "{$wa_url}wa-apps/developer/img/developer.png"
+],
+[
+    "name" => "Поддержка",
+    "url" => "javascript:void(0);",
+    "icon_url" => "{$wa_url}wa-apps/ui/img/ui.png"
+]
+]}
+
+{function name="_render"}
+<ul class="menu-h">
+{foreach $_menu as $_item}
+    <li{if !empty($_item.selected)} class="selected"{/if}>
+        <a href="{$_item.url|escape}">{$_item.name|escape}</a>
+    </li>
+{/foreach}
+</ul>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+    <p>Горизонтальное меню (табы) для выбора подраздела текущего экрана или фильтра контента.</p>
+
+    <div class="line">
+        {_render}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

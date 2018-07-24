@@ -14,7 +14,7 @@
         {if $options.login == 'email'}[s`Email`]{else}[s`Login`]{/if}:
         </div>
         <div class="value">
-            <input type="text" class="wa-login-text-input" id="wa-login-input" value="{$login|escape}" name="login" placeholder="{if $options.login == 'email'}[s`Email`]{else}[s`Email or login name`]{/if}" />
+            <input type="text" class="wa-login-text-input" autocomplete="off" id="wa-login-input" value="{$login|escape}" name="login" placeholder="{if $options.login == 'email'}[s`Email`]{else}[s`Email or login name`]{/if}" />
         </div>
     </div>
     <div class="field">
@@ -22,7 +22,7 @@
             [s`Password`]:
         </div>
         <div class="value">
-            <input type="password" class="wa-login-text-input" name="password" value="{if !empty($password)}{$password}{/if}" placeholder="[s`Password`]" />
+            <input type="password" class="wa-login-text-input" autocomplete="off" name="password" value="{if !empty($password)}{$password}{/if}" placeholder="[s`Password`]" />
             {if $options.remember_enabled}
             <div class="wa-remember-me">
                 <input id="remember-me" name="remember" type="checkbox" {if !empty($remember) || $wa->post('remember')}checked="checked" {/if} value="1" /> <label for="remember-me">[s`Remember me`]</label>
@@ -42,7 +42,6 @@
             <a href="?forgotpassword" class="wa-forgotpassword underline">[s`Forgot password?`]</a>
         </div>
     </div>
-    {$wa->csrf()}
 </div>
 </form>
 <script type="text/javascript">
@@ -63,20 +62,5 @@ $(function() {
         form.submit();
         return false;
     });
-
-    // Update csrf token right before submit
-    // in case it changed via another browser tab
-    var $csrf_hidden_field = $('[name="_csrf"]');
-    $csrf_hidden_field.closest('form').submit(function() {
-        $csrf_hidden_field.val(getCsrfToken());
-    });
-
-    function getCsrfToken() {
-        var matches = document.cookie.match(new RegExp("(?:^|; )_csrf=([^;]*)"));
-        if (!matches || !matches[1]) {
-            return '';
-        }
-        return decodeURIComponent(matches[1]);
-    }
 });
 </script>

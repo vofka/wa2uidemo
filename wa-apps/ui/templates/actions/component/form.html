@@ -1,0 +1,137 @@
+{$_title = ".form"}
+{$wa->title($_title)}
+
+{function name="_render"}
+<div class="form">
+    <div class="form-group">
+
+        <div class="field">
+            <div class="name middle">
+                Input
+            </div>
+            <div class="value">
+                <div class="wa-input text">
+                    <input type="text" name="" value="Jimmy" placeholder="First name">
+                </div>
+                <label class="wa-input text">
+                    <input type="text" name="" value="Clark" placeholder="Last name">
+                    <span class="wa-icon">
+                        <i class="far fa-smile"></i>
+                    </span>
+                </label>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">
+                <label for="checkbox">Checkbox</label>
+            </div>
+            <div class="value middle">
+                <label>
+                    <span class="wa-checkbox">
+                        <input type="checkbox" name="1" id="checkbox" checked>
+                        <span>
+                            <span class="wa-icon">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </span>
+                    </span>
+                    I can’t wait to upgrade to Webasyst 2
+                </label>
+                <p class="hint">Please enter your first and last names</p>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name">
+                Radio
+            </div>
+            <div class="value">
+                <ul class="wa-list">
+                    <li>
+                        <label>
+                            <span class="wa-radio">
+                                <input type="radio" name="name-1">
+                                <span></span>
+                            </span>
+                            Option 1
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span class="wa-radio">
+                                <input type="radio" name="name-1">
+                                <span></span>
+                            </span>
+                            Option 2
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span class="wa-radio">
+                                <input type="radio" name="name-1">
+                                <span></span>
+                            </span>
+                            Option 3
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <span class="wa-radio">
+                                <input type="radio" name="name-1">
+                                <span></span>
+                            </span>
+                            Option 4
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name middle">
+                Select
+            </div>
+            <div class="value middle">
+                <div class="wa-select">
+                    <select name="">
+                        <option value="">Saint-Petersburg</option>
+                        <option value="moscow">Moscow</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <div class="name middle">
+                Textarea
+            </div>
+            <div class="value middle">
+                <textarea class="wa-textarea" name=""></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="field">
+            <div class="value">
+                <input type="button" class="button" value="Save">
+            </div>
+        </div>
+    </div>
+</div>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+    <p>Для всех элементов ввода данных используется своя уникальная стилистика, оптимизированная для удобной работы на устройствах разных типов.</p>
+    <p>Класс .fields переименован в .form. Вся внутренняя семантика сохранена.</p>
+
+    <div class="line">
+        {_render}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

@@ -2,9 +2,9 @@
 <link rel="stylesheet" href="{$wa_url}wa-content/css/dashboard/dashboard.css?v={$wa->version()}">
 <script src="{$wa_url}wa-content/js/jquery-wa/wa.dialog.js"></script>
 
-<div class="d-page-wrapper" id="d-page-wrapper">
+<div class="d-page-wrapper flexbox" id="d-page-wrapper">
 
-    <div class="d-content-wrapper">
+    <div class="d-content-wrapper content transparent">
         <section class="d-activity-wrapper" id="d-activity-wrapper">
             {* NOTIFICATIONS *}
             {if !empty($notifications)}
@@ -13,39 +13,9 @@
 
             {* ACTIVITY LIST *}
             <div class="d-activity-block {if empty($show_tutorial)}is-shown{/if}" id="widget-activity">
-                <header class="activity-header-wrapper block">
-                    <h4 class="activity-header heading">[`Live Stream`]<i class="icon16 loading" style="display: none;"></i></h4>
-                    <div class="activity-filter-wrapper">
-                        <ul class="menu-h dropdown">
-                            <li>
-                                {$checked = ""}
-                                {$is_not_full = false}
-                                {$check_count = 0}
-                                {capture assign="select_options"}
-                                    {foreach $apps as $app_id => $app}
-                                        {if in_array($app_id, $user_filters) || !$user_filters}
-                                            {$checked = "checked"}
-                                            {$check_count = $check_count + 1}
-                                        {else}
-                                            {$checked = ""}
-                                            {$is_not_full = true}
-                                        {/if}
-                                        <li>
-                                            <label><input {$checked} type="checkbox" name="app_id[]" value="{$app_id}">&nbsp;{$app.name}</label>
-                                        </li>
-                                    {/foreach}
-                                {/capture}
-                                <a href="javascript:void(0);" class="inline-link"><b><i id="activity-select-text" data-full-text="[`All apps`]" data-not-full-text="[`Selected apps`]">{if $is_not_full}[`Selected apps`] ({$check_count}){else}[`All apps`]{/if}</i></b><i class="icon10 darr-tiny"></i></a>
-                                <form action="" id="activity-filter">
-                                    <ul class="menu-v">
-                                        {$select_options|strip}
-                                    </ul>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="cl"></div>
-                </header>
+                {* <header class="activity-header-wrapper block">
+                    REMOVED FROM THE DEMO
+                </header> *}
                 <section class="activity-list-wrapper">
                     <div class="activity-list-block" data-empty-text="[`No events in the live stream yet.`]">
                         {if !empty($activity)}

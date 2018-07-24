@@ -136,13 +136,7 @@ abstract class blogItemModel extends waModel
         }
 
         if (isset($this->sql_params['order']) && $this->sql_params['order']) {
-            if (is_array($this->sql_params['order'])) {
-                $order = implode(',', $this->sql_params['order']);
-            } else {
-                $order = $this->sql_params['order'];
-            }
-
-            $sql .= "\n ORDER BY {$order}";
+            $sql .= "\n ORDER BY {$this->sql_params['order']}";
             unset($this->sql_params['order']);
         }
         if ($count) {

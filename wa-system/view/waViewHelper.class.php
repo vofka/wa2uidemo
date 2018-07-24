@@ -39,7 +39,15 @@ class waViewHelper
 
     public function header()
     {
-        return wa_header();
+        return wa_header(); //wa-1.3.css
+    }
+    public function account()
+    {
+        return wa_account(); //wa-2.0.css
+    }
+    public function applist()
+    {
+        return wa_applist(); //wa-2.0.css
     }
 
     public function app()
@@ -315,16 +323,16 @@ HTML;
         return waRequest::get('module', $default);
     }
 
-    public function css($strict = false)
+    public function css($strict = false,$base_css_version='2.0')
     {
         if (wa()->getEnv() == 'backend' || wa()->getEnv() == 'api') {
-            $css = '<link href="'.wa()->getRootUrl().'wa-content/css/wa/wa-1.3.css?v'.$this->version(true).'" rel="stylesheet" type="text/css" >
+            $css = '<link href="'.wa()->getRootUrl().'wa-content/css/wa/wa-'.$base_css_version.'.css?v'.$this->version(true).'" rel="stylesheet" type="text/css" >
 <!--[if IE 9]><link type="text/css" href="'.wa()->getRootUrl().'wa-content/css/wa/wa-1.0.ie9.css" rel="stylesheet"><![endif]-->
 <!--[if IE 8]><link type="text/css" href="'.wa()->getRootUrl().'wa-content/css/wa/wa-1.0.ie8.css" rel="stylesheet"><![endif]-->
 <!--[if IE 7]><link type="text/css" href="'.wa()->getRootUrl().'wa-content/css/wa/wa-1.0.ie7.css" rel="stylesheet"><![endif]-->
 <link type="text/css" rel="stylesheet" href="'.wa()->getRootUrl().'wa-content/font/ruble/arial/fontface.css">'."\n";
 
-            if ( !waRequest::isMobile(false) )
+            if ( !waRequest::isMobile(false) || $base_css_version=='2.0' )
                 $css .= '<meta name="viewport" content="width=device-width, initial-scale=1" />'."\n"; //for handling iPad and tablet computer default view properly
 
         } else {
@@ -682,7 +690,7 @@ HTML;
 
     public function csrf()
     {
-        return '<input type="hidden" name="_csrf" value="'.htmlspecialchars(waRequest::cookie('_csrf', '')).'" />';
+        return '<input type="hidden" name="_csrf" value="'.waRequest::cookie('_csrf', '').'" />';
     }
 
     public function captcha($options = array(), $error = null, $absolute = null, $refresh = null)
@@ -693,8 +701,7 @@ HTML;
             $error = $options;
             $options = array();
         }
-        // $options['app_id'] is supported since 1.8.2
-        return wa(ifset($options, 'app_id', $this->app_id))->getCaptcha($options)->getHtml($error, $absolute, $refresh);
+        return wa($this->app_id)->getCaptcha($options)->getHtml($error, $absolute, $refresh);
     }
 
     public function captchaUrl($add_random = true)
@@ -1188,7 +1195,7 @@ HTML;
     public function getContactTabs($id)
     {
         $id = (int) $id;
-        if (!$id || wa()->getEnv() !== 'backend') {
+        if (!$id) {
             return array();
         }
 

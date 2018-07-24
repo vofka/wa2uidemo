@@ -1,0 +1,72 @@
+{$_title = "Типографика"}
+{$wa->title($_title)}
+
+<h1>{$_title}</h1>
+<p>Базовое семейство шрифтов определяется операционной системой пользователя и позволяет приблизить визуальное восприятие приложений Webasyst к десктоп-приложениям.</p>
+
+<blockquote><code>font-family: <b>-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif</b>;</code></blockquote>
+
+<p>Базовый размер элемента — 16px — рассчитан на удобную работу с текстом на всех типах устройств.</p>
+
+<blockquote><code>font-size: <b>16px</b>;</code></blockquote>
+
+{function name="_render_1"}
+<h1>h1. Заголовок</h1>
+<h2>h2. Заголовок</h2>
+<h3>h3. Заголовок</h3>
+<h4>h4. Заголовок</h4>
+<h5>h5. Заголовок</h5>
+<h6>h6. Заголовок</h6>
+{/function}
+
+{function name="_render_2"}
+<p class="h1">h1. Параграф</p>
+<p class="h2">h2. Параграф</p>
+<p class="h3">h3. Параграф</p>
+<p class="h4">h4. Параграф</p>
+<p class="h5">h5. Параграф</p>
+<p class="h6">h6. Параграф</p>
+{/function}
+
+{function name="_render_3"}
+<p>Для подсветки части текста используется <mark>тег &lt;mark&gt;</mark> или класс <span class="highlighted">.highlighted</span>.</p>
+
+<p>Варианты перечеркнутого текста:</p>
+<ul>
+    <li><del>удаленный текст &lt;del&gt;</del>;</li>
+    <li><s>неточные данные &lt;s&gt;</s>;</li>
+    <li>через класс <span class="strike">".strike"</span>.</li>
+</ul>
+
+<p>Варианты подчеркнутого текста:</p>
+<ol>
+    <li><ins>дополнение к документу &lt;ins&gt;</ins>;</li>
+    <li><u>подчеркнутая тегом &lt;u&gt;</u>;</li>
+    <li>через класс <span class="underline">".underline"</span>.</li>
+</ol>
+
+<p>Отображение текста меньшего размера производится с помощью <small>тега &lt;small&gt;</small> или <span class="small">класса .small</span>. Отображение текста большего размера — с помощью <span class="large">класса .large</span>.</p>
+<p>Жирный текст можно получить, используя <strong>тег &lt;strong&gt;</strong>, <b>тег &lt;b&gt;</b> или через <span class="bold">класс .bold</span>.</p>
+<p>Курсив: <em>Эта строка выделена тегом &lt;em&gt;.</em> или через <span class="italic">класс ".italic"</span>.</p>
+{/function}
+
+<div class="u-component-page">
+    <div class="line">
+        {_render_1}
+        <textarea class="u-code-preview" disabled>{_render_1|escape}</textarea>
+    </div>
+
+    <div class="line">
+        {_render_2}
+        <textarea class="u-code-preview" disabled>{_render_2|escape}</textarea>
+    </div>
+
+    <div class="line">
+        {_render_3}
+        <textarea class="u-code-preview" disabled>{_render_3|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

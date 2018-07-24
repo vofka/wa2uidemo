@@ -20,7 +20,7 @@ class blogViewHelper extends waAppViewHelper
 
     public function rssUrl()
     {
-        return $this->wa->getRouteUrl('blog/frontend/rss', array(), true, wa()->getRouting()->getDomain());
+        return $this->wa->getRouteUrl('blog/frontend/rss', array(), true);
     }
 
     public function blogs()

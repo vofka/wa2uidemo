@@ -1,14 +1,14 @@
 
   <div class="b-stream b-first-post">
     <div class="b-stream-title">
-
+{* 
       <div class="float-right ie-menu-h-fix">
         <ul class="menu-h" id="blog-stream-primary-menu">
           <li class="b-search-form">
             <input type="search" name="text" class="search" placeholder="[`Search posts`]" value="">
           </li>
         </ul>
-      </div>
+      </div> *}
 
       <h1>
       {if isset($blog) && $blog}
@@ -27,7 +27,7 @@
       </h1>
     </div>
 
-    <div class="block triple-padded b-post b-white b-one-post-on-page {$blog.color}" id="b-post-{$post.id}">
+    <div class="page b-post b-white b-one-post-on-page {$blog.color}" id="b-post-{$post.id}">
       {$post_edit=false}
       {if ($post.rights ge blogRightConfig::RIGHT_FULL) or (($post.contact_id eq $current_contact.id) and ($post.rights ge blogRightConfig::RIGHT_READ_WRITE))}
         {$post_edit=true}
@@ -247,4 +247,3 @@
 {wa_js file="js/blog-post.min.js"}
     {$wa_app_static_url}js/blogPost.js
 {/wa_js}
-

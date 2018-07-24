@@ -30,12 +30,12 @@
   {$wa_app_static_url}js/jquery.form.js
   {/wa_js}
   {$wa->js(false)}
-  
+
   {* @event backend_assets.%plugin_id% *}
   {foreach $backend_assets as $item}
       {$item}
   {/foreach}
-  
+
   <script type="text/javascript">
   $.wa_blog = $.extend(true,$.wa_blog,{
     'rights':{json_encode($rights)}
@@ -43,14 +43,27 @@
   </script>
 </head>
 <body>
-  <div id="wa">
-    {$wa->header()}
-    <div id="wa-app">
-      {$sidebar}
-      <div class="content left200px">
-        {$content}
-      </div>
-    </div><!-- #wa-app -->
-  </div><!-- #wa -->
+
+    <div id="wa">
+
+        <nav class="sidebar no-gradient">
+            {$wa->account()}
+            <main id="wa-app-navigation" class="flexbox vertical bordered-right">
+                {$sidebar}
+            </main>
+        </nav>
+
+        <main class="content transparent">
+
+            {$wa->applist()} {* placed in the same flex container with the app content for same scroll *}
+
+            <div id="wa-app-content">
+                <div class="longread">
+                    {$content}
+                </div>
+            </div>
+        </main>
+
+    </div>
 </body>
 </html>

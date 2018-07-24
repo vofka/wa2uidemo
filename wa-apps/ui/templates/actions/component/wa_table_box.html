@@ -1,0 +1,30 @@
+{$_title = "Table-box"}
+{$wa->title($_title)}
+
+{function name="_render_fixed"}
+<div class="wa-table-box fixed">
+    <div class="column middle">
+        <div style="height: 100px; line-height: 100px; background: #abc;">Блок слева</div>
+    </div>
+    <div class="column align-right">
+        <div style="height: 200px; line-height: 200px; background: #cba;">Блок справа</div>
+    </div>
+</div>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+
+    <div class="line">
+        <p>.wa-table-box.fixed</p>
+        {_render_fixed}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview" disabled>{_render_fixed|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

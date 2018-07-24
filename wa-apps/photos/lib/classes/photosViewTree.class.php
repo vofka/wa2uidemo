@@ -128,18 +128,19 @@ class photosViewTreeElement
     public function display($view_type = 'backend')
     {
         $result = $view_type == 'backend' ?
-            '<li class="dr '.$this->getClass().'" rel="'.$this->data['id'].'"><span class="count">'.(!is_null($this->data['count']) ? $this->data['count'] : '').'</span>' :
+            '<li class="dr '.$this->getClass().'" rel="'.$this->data['id'].'">' :
             '<li>';
 
-        if ($this->childs) {
-            $result .= $view_type == 'backend' ?
-                '<i class="icon16 darr overhanging collapse-handler" id="album-'.$this->data['id'].'-handler"></i>' :
-                '';
-        }
+        // if ($this->childs) {
+        //     $result .= $view_type == 'backend' ?
+        //         '<i class="icon16 darr overhanging collapse-handler" id="album-'.$this->data['id'].'-handler"></i>' :
+        //         '';
+        // }
         $result .= $view_type == 'backend' ?
-                '<a href="'.$this->getHash().'"><i class="icon16 '.$this->getIcon().'"></i><span class="album-name">'.photosPhoto::escape(ifempty($this->data['name'], _w('(no name)'))).'</span> '.$this->getStatusIcon().
+                '<a href="'.$this->getHash().'"><i class="fas fa-book '.$this->getIcon().'"></i><span class="album-name">'.photosPhoto::escape(ifempty($this->data['name'], _w('(no name)'))).' '.$this->getStatusIcon().
                     ' <strong class="small highlighted count-new">'.(!empty($this->data['count_new']) ? '+' . $this->data['count_new'] : '').'</strong>'.
-                    ' <span class="count"><i class="icon10 add p-new-album"></i></span>'.
+                    ' </span>'.
+                    ' <span class="count">'.(!is_null($this->data['count']) ? $this->data['count'] : '').'<i class="icon10 add p-new-album"></i></span>'.
                 '</a>' :
                 '<a href="'.photosFrontendAlbum::getLink($this->data).'">'.photosPhoto::escape($this->data['name']).'</a>';
         if ($this->childs) {

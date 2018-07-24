@@ -1,0 +1,143 @@
+{$_title = ".dialog"}
+{$wa->title($_title)}
+
+{function name="_dialog_html" id=""}
+<div class="dialog" id="{$id|default:""}">
+    <div class="dialog-background"></div>
+    <div class="dialog-body">
+        <header class="dialog-header"><h1>Header</h1></header>
+        <div class="dialog-content">Content</div>
+        <footer class="dialog-footer">
+            <button class="js-close-dialog button purple">Close</button>
+        </footer>
+    </div>
+</div>
+{/function}
+
+{function name="_render_dialog"}
+<button class="js-show-dialog button purple">Показать простой диалог</button>
+<script>
+    ( function($) {
+        var dialog_html = {_dialog_html|strip|json_encode};
+
+        $(".js-show-dialog").on("click", function() {
+            var dialog = $.waDialog({
+                html: dialog_html
+            });
+        });
+    })(jQuery);
+</script>
+{/function}
+
+{function name="_render_dialog_2"}
+<button class="js-show-dialog-2 button purple">Показать диалог 2</button>
+<script>
+    ( function($) {
+        var $wrapper = $({_dialog_html|strip|json_encode});
+
+        $(".js-show-dialog-2").on("click", function() {
+            var dialog = $.waDialog({
+                wrapper: $wrapper
+            });
+        });
+    })(jQuery);
+</script>
+{/function}
+
+{function name="_render_dialog_3"}
+<button class="js-show-dialog-3 button purple">Показать диалог 3</button>
+<button class="js-show-dialog-4 button purple">Показать диалог 4</button>
+<button class="js-show-dialog-5 button purple">Показать диалог 5</button>
+<script>
+    ( function($) {
+        $(".js-show-dialog-3").on("click", function() {
+            var dialog = $.waDialog({
+                header: $("<h2 />").text("Я крутой заголовок"),
+                content: $("<div />").text("Я превосходный текст"),
+                footer: $("<div />").text("Я стойкий подвал")
+            });
+        });
+
+        $(".js-show-dialog-4").on("click", function() {
+            var dialog = $.waDialog({
+                content: "Текст"
+            });
+        });
+
+        var $header = $("<h2 />");
+        var $content = $("<div><form><input type='text' name='name'> Название</form></div>");
+        var $footer = $("<div><input class='js-submit-form' type='submit' value='Сохранить'><button class='js-close-dialog'>Закрыть</button></div>");
+        var $form = $content.find("form");
+        var index = 1;
+
+        $form.on("submit", function(event) {
+            event.preventDefault();
+            console.log( $(this).serializeArray() );
+        });
+
+        $footer.find(".js-submit-form").on("click", function() {
+            $form.trigger("submit");
+        });
+
+        var dialog = false;
+
+        $(".js-show-dialog-5").on("click", function() {
+            if (dialog) {
+                dialog.show();
+            } else {
+                dialog = $.waDialog({
+                    header: $header,
+                    content: $content,
+                    footer: $footer,
+                    onClose: function(dialog) {
+                        dialog.hide();
+                        return false;
+                    }
+                });
+            }
+
+            index += 1;
+            $header.text(index);
+        });
+    })(jQuery);
+</script>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_dialog_html|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h4>Самый правильный диалог</h4>
+        {_render_dialog}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dialog|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h4>Сложный диалог</h4>
+        {_render_dialog_2}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dialog_2|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h4>Сложный диалог</h4>
+        {_render_dialog_3}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dialog_3|escape}</textarea>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>

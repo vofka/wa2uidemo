@@ -1,0 +1,213 @@
+{$_title = ".dropdown"}
+{$wa->title($_title)}
+
+{function name="_render_dropdown"}
+<div class="dropdown" id="dropdown-1">
+    <button class="dropdown-toggle button orange" type="button">.dropdown</button>
+    <div class="dropdown-area">
+        <a class="dropdown-item" href="https://www.webasyst.ru/" target="_blank">www.webasyst.ru</a>
+        <a class="dropdown-item" href="http://www.shop-script.ru/" target="_blank">www.shop-script.ru</a>
+    </div>
+    <script>
+        ( function($) {
+            $("#dropdown-1").waDropdown();
+        })(jQuery);
+    </script>
+</div>
+{/function}
+
+{function name="_render_dropdown_menu_v"}
+<div class="dropdown" id="dropdown-2">
+    <button class="dropdown-toggle button yellow" type="button">.dropdown &gt; .menu-v</button>
+    <div class="dropdown-area">
+        <ul class="menu-v">
+            <li>
+                <a href="https://www.webasyst.ru/">www.webasyst.ru</a>
+            </li>
+            <li>
+                <a href="http://www.shop-script.ru/">www.shop-script.ru</a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        ( function($) {
+            $("#dropdown-2").waDropdown();
+        })(jQuery);
+    </script>
+</div>
+{/function}
+
+{function name="_render_dropdown_select"}
+<div class="dropdown" id="select" data-change-selector=".dropdown-item" data-hover="false">
+    <button class="dropdown-toggle button green" type="button">.dropdown &gt; select</button>
+    <div class="dropdown-area">
+        <div class="dropdown-item" data-id="1">
+            <i class="icon16 userpic" style="background-image: url('/wa-content/img/_dummy_userpics/userpic1.jpg');"></i>
+            Пользователь #1
+        </div>
+        <div class="dropdown-item" data-id="2">
+            <i class="icon16 userpic" style="background-image: url('/wa-content/img/_dummy_userpics/userpic2.jpg');"></i>
+            Пользователь #2
+        </div>
+        <div class="dropdown-item" data-id="3">
+            <i class="icon16 userpic" style="background-image: url('/wa-content/img/_dummy_userpics/userpic3.jpg');"></i>
+            Пользователь #3
+        </div>
+        <div class="dropdown-item" data-id="4">
+            <i class="icon16 userpic" style="background-image: url('/wa-content/img/_dummy_userpics/userpic4.jpg');"></i>
+            Пользователь #4
+        </div>
+    </div>
+    <input id="input" name="dropdown_select" type="hidden" value="">
+
+    <script>
+        ( function($) {
+            $("#select").waDropdown({
+                change: function(event, target, dropdown) {
+                    alert( $(target).data("id") );
+                }
+            });
+        })(jQuery);
+    </script>
+</div>
+
+<script>
+    ( function($) {
+        $("#select").on("change", function(event, target, dropdown) {
+            $("#input").val( $(target).data("id") );
+        });
+    })(jQuery);
+</script>
+{/function}
+
+{function name="_render_dropdown_custom"}
+<div class="dropdown" id="custom">
+    <button class="dropdown-toggle button red" type="button">.dropdown custom content</button>
+    <div class="dropdown-area">
+        <div class="block">
+            <form action="">
+                <ul class="menu-v">
+                    <li>
+                        <label>
+                            <input type="checkbox" name="">
+                            <i class="color" style="background-color: #abc;"></i>
+                            Пункт #1
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="">
+                            <i class="color" style="background-color: #bca;"></i>
+                            Пункт #2
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="">
+                            <i class="color" style="background-color: #acb;"></i>
+                            Пункт #3
+                        </label>
+                    </li>
+                    <li>
+                        <label>
+                            <input type="checkbox" name="">
+                            <i class="color" style="background-color: #bac;"></i>
+                            Пункт #4
+                        </label>
+                    </li>
+                </ul>
+                <div>
+                    <input type="submit" value="Применить">
+                    <input type="reset" value="Очистить">
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        ( function($) {
+            $("#custom").waDropdown();
+
+            $("#custom").on("submit", function(event) {
+                event.preventDefault();
+                alert("Menu hide after this");
+                $(this).data("dropdown").hide();
+            });
+        })(jQuery);
+    </script>
+</div>
+{/function}
+
+<div class="u-component-page">
+    <h1 class="u-page-title">{$_title|escape}</h1>
+    <p>Выпадающий блок навигации и произвольным содержимым — колоночным меню, выбором из списка, параграфом с произвольным контентом или просто картинкой.</p>
+
+    <div class="line">
+        <h4>Выпадающее меню с ссылками на ресурсы</h4>
+        {_render_dropdown}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dropdown|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h4>Выпадающее меню со списком .menu-v</h4>
+        {_render_dropdown_menu_v}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dropdown_menu_v|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h4>Выпадающее меню - имитация поведения select</h4>
+        {_render_dropdown_select}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dropdown_select|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h4>Выпадающее меню со сложным контентом</h4>
+        {_render_dropdown_custom}
+    </div>
+
+    <div class="line">
+        <textarea class="u-code-preview wide" disabled>{_render_dropdown_custom|escape}</textarea>
+    </div>
+
+    <div class="line">
+        <h2>API</h2>
+        <p>
+            <span class="bold">data-hover="boolean"</span>
+            <br>По умолчанию "true"
+            <br>Включает поддержку раскрытия меню по наведению.
+        </p>
+        <p>
+            <span class="bold">data-change-selector="string"</span>
+            <br>По умолчанию ""
+            <br>При установке селектора, начинает работать ивент .on("change").
+        </p>
+        <p>
+            <span class="bold">data-change-class="string"</span>
+            <br>По умолчанию "selected"
+            <br>CSS класс, который будет проставляться на выбранный элемент.
+        </p>
+        <p>
+            <span class="bold">data-change-title="boolean"</span>
+            <br>По умолчанию "true"
+            <br>От параметра зависит будет ли изменяться название кнопки при смене активного элемента меню.
+        </p>
+        <p>
+            <span class="bold">data-change-selector="boolean"</span>
+            <br>По умолчанию "true"
+            <br>От параметра зависит будет ли скрыто меню при смене активного элемента.
+        </p>
+    </div>
+
+    <script>
+        $.ui.title.set({$_title|json_encode});
+    </script>
+</div>
