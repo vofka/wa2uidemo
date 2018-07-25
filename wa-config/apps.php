@@ -7,4 +7,6 @@ return array(
     'photos' => true,
     'ui' => true,
     'stickies' => true,
+    //'contacts' => true,
+    //'team' => true,
 );

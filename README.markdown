@@ -1,14 +1,13 @@
-# Webasyst #
+# Webasyst 2 UI Demo Preview #
 
-Webasyst is an open source PHP Framework for developing web apps with backend and frontend.
-Distributed under the terms of LGPL license.
-http://www.webasyst.com/
+Ознакомительная версия интерфейса бекенда Webasyst 2.
+https://www.webasyst.ru
 
 ## System Requirements ##
 
 	* Web Server
 		* e.g. Apache or IIS
-		
+
 	* PHP 5.2+
 		* spl extension
 		* mbstring
@@ -29,7 +28,7 @@ http://www.webasyst.com/
 		git clone git://github.com/webasyst/webasyst-framework.git
 
 	via SVN:
-	
+
 		cd %PATH%
 		svn checkout http://svn.github.com/webasyst/webasyst-framework.git
 
@@ -44,7 +43,7 @@ http://www.webasyst.com/
 
 		cd ..
 		chmod %PATH% 0775
-		
+
 		(or 0777 depending on server configuration)
 
 3. MySQL Database:
