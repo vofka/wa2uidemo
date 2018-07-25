@@ -240,7 +240,7 @@ input.long { min-width: 350px !important; width: 350px !important; }
     #wa-login-dialog { display: block; /* always visible */ background: #8FACD2 url('../../../wa-content/img/backgrounds/bokeh_vivid.jpg'); background-size: cover; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-attachment: fixed; }
     #wa-login .dialog .dialog-background { background: inherit; opacity: 1; filter: blur(6px);
         top: 50% !important; bottom: auto !important; left: 50% !important; right: 50% !important; width: 600px !important; height: 464px !important; margin-left: -300px !important; margin-top: -200px !important;}
-    #wa-login .dialog .dialog-window { box-shadow: 0px 2px 217px rgba(0, 30, 50,0.65), inset 0 0 90px 40px rgba(255,255,255, 0.25); background: rgba(55,94,159,0.55); border: none;
+    #wa-login .dialog .dialog-window { box-shadow: 0px 2px 217px rgba(0, 30, 50,0.65), inset 0 0 90px 40px rgba(255,255,255, 0.25); background: rgba(55,94,159,0.55); border: none; position: absolute;
         top: 50% !important; bottom: auto !important; left: 50% !important; right: 50% !important; width: 600px !important; height: 400px !important; margin-left: -300px !important; margin-top: -200px !important; border-radius: 10px; }
     #wa-login .dialog .dialog-content { overflow: visible; }
     #wa-login .dialog.error .dialog-window { box-shadow: 0px 7px 90px rgba(255,0,0,0.5); background: rgba(255,111,111,0.25); }

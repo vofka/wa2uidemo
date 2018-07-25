@@ -12,9 +12,11 @@
 </head>
 <body>
 
-<div id="wa">
-    {$wa->header()}
-
+<div id="wa" class="flexbox vertical">
+    <div id="wa-header">
+        {$wa->account()}
+        {$wa->applist()}
+    </div>
     <div class="t-app-wrapper" id="wa-app">
         <div class="t-content-wrapper">
             <div class="t-content-block" id="t-content">

@@ -1,7 +1,7 @@
 # Webasyst 2 UI Demo Preview #
 
 Ознакомительная версия интерфейса бекенда Webasyst 2.
-https://www.webasyst.ru
+http://2.webasyst.ru
 
 ## System Requirements ##
 

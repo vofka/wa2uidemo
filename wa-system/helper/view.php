@@ -332,7 +332,7 @@ HTML;
             <a href="#" class="tooltip-bottom" data-tooltip="Set status">
                 {$userpic}
             </a>
-            <i class="wa-status-indicator"></i>
+            <!-- <i class="wa-status-indicator"></i> -->
         </div>
         <!-- <div class="wa-user-stack">
             <a href="#" class="tooltip-bottom" data-tooltip="в Краснодаре!"><img class="wa-userpic" src="/wa-content/img/_dummy_userpics/userpic2.jpg"><i class="wa-status-indicator" style="background: #0081d3;"></i></a>

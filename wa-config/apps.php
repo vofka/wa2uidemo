@@ -1,11 +1,11 @@
 <?php
 
 return array(
-    'dummy' => true,
-    'site' => true,
+    'ui' => true,
     'blog' => true,
     'photos' => true,
-    'ui' => true,
+    'dummy' => true,
+    'site' => true,
     'stickies' => true,
     //'contacts' => true,
     //'team' => true,

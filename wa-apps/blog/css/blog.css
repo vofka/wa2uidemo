@@ -95,7 +95,7 @@ span.b-yellow { background: #ffd; }
 
 .b-stream.b-shadowed .b-post { margin-top: 0; border: none; box-shadow: none; border-top: none; }
 
-.b-empty-list { text-align: center; padding: 70px 100px 70px; color: #888; }
+.b-empty-list { text-align: center; padding: 70px 100px 70px; color: #888; background: transparent; }
 
 .b-welcome { padding: 40px 100px 80px; }
 .b-welcome h1 { color: #aaa; font-size: 1.8em; font-weight: normal; margin-bottom: 20px; }
