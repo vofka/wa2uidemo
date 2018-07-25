@@ -310,7 +310,7 @@ input.long { min-width: 350px !important; width: 350px !important; }
 .sidebar footer,
 .sidebar .sidebar-footer { flex: 0 0 auto; }
 
-.sidebar.aside { order: 2; }
+.sidebar.aside { order: 2; background: transparent; }
 .sidebar.no-gradient { background: transparent; }
 
 .sidebar.left300px { flex: 0 0 316px; }
@@ -759,6 +759,13 @@ table td.no-border { border: none; }
 --------- */
 
 @media screen and (max-width: 760px) {
+
+    h1, .h1 { font-size: 1.8rem; }
+    h2, .h2 { font-size: 1.6rem; }
+    h3, .h3 { font-size: 1.5rem; }
+    h4, .h4 { font-size: 1.2rem; }
+    h5, .h5 { font-size: 1.1rem; }
+    h6, .h6 { font-size: 1.0em; }
 
     #wa { flex-direction: column; }
 

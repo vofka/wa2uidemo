@@ -28,6 +28,17 @@ $(function () {
         */
     }).resize();
 
+    var lastScrollTopPosition = 0;
+    $('.content').scroll(function() {
+       var _lstp = $(this).scrollTop();
+       if (_lstp > lastScrollTopPosition) {
+           $('#wa-apps').removeClass('wa-apps-sticky');
+       } else if (_lstp > $('#wa-apps').height()) {
+           $('#wa-apps').addClass('wa-apps-sticky');
+       }
+       lastScrollTopPosition = _lstp;
+    });
+
     var sortableApps = function () {
         $("#wa-applist ul").sortable({
             distance: 5,
@@ -128,21 +139,26 @@ $(function () {
         }
     });
 
-    $('#wa-moreapps').click(function() {
-        if ($(this).hasClass('uarr'))
-        {
-            $('#wa-header').css('height', '83px');
-            $('#wa-moreapps').removeClass('uarr');
-            $('#wa-header').removeClass('wa-moreapps');
-            $(window).resize();
-        } else {
-            if ($('#wa-applist li:last').attr('id')) {
-                $('#wa-moreapps').parent().insertAfter($('#wa-applist li:last'));
-            }
-            $('#wa-header').css('height', 'auto');
-            $('#wa-moreapps').addClass('uarr');
-            $('#wa-header').addClass('wa-moreapps');
-        }
+    // $('#wa-moreapps').click(function() {
+    //     if ($(this).hasClass('uarr'))
+    //     {
+    //         $('#wa-header').css('height', '83px');
+    //         $('#wa-moreapps').removeClass('uarr');
+    //         $('#wa-header').removeClass('wa-moreapps');
+    //         $(window).resize();
+    //     } else {
+    //         if ($('#wa-applist li:last').attr('id')) {
+    //             $('#wa-moreapps').parent().insertAfter($('#wa-applist li:last'));
+    //         }
+    //         $('#wa-header').css('height', 'auto');
+    //         $('#wa-moreapps').addClass('uarr');
+    //         $('#wa-header').addClass('wa-moreapps');
+    //     }
+    //     return false;
+    // });
+
+    $('#wa-mobile-hamburger a').click(function() {
+        alert('wa2uidemo PREVIEW NOTICE: верхний фиксированный ряд превращается в меню приложений с возможностью скролла, а ниже показывается блок #wa-app-navigation, который обычно находится в сайдбаре приложения (хотя может быть и каким угодно, как, например, меню в ШС). простите, но в превью-версии это поведение вырезано.');
         return false;
     });
 

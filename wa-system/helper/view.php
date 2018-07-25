@@ -316,9 +316,9 @@ function wa_applist()
     <nav id="wa-applist" {$applist_class}>
         <ul>
             {$apps_html}
-            <li>
+            <!-- WA2UI PREVIEW NOTICE: этого элемента не будет. меню будет раскрываться во всей красе просто по :hover с задержкой.<li>
                 <a href="#" id="wa-moreapps"></a>
-            </li>
+            </li> -->
             <li id="wa-mobile-hamburger">
                 <a href="#"><i class="fas fa-bars"></i></a>
             </li>

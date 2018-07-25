@@ -58,6 +58,7 @@
 .p-image:hover i.p-image-nav { transition: opacity 0.2s 1s ease; opacity: 0.35; }
 .p-image:hover i.p-image-nav:hover { opacity: 1; -webkit-transition-delay: 0; transition: opacity 0.2s 0s ease; }
 
+#p-content { min-height: 100vh; }
 #p-content ul.menu-h.p-content-control { margin-top: -0.1em; margin-bottom: 0.5em; font-size: 0.9em; }
 #p-content ul.menu-h.p-content-control li { margin-right: 5px; min-height: 12px; }
 #p-content ul.menu-h li.p-inline-mixed-string { position: relative; top: 1px; padding-left: 2px; }
